@@ -1,6 +1,13 @@
 # Todoify
 ##MMP2A
 
+###Setup
+
+    bundle
+    rake db:migrate
+    rake db:seed
+    rails server
+
 
 
 ###Contributors###
@@ -19,7 +26,7 @@
 
 ###The MIT License###
 ===============
-Copyright (c) 2009 Anton Grigoryev
+Copyright (c) 2015 Alexander Gabriel, Sebastian Huber
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
