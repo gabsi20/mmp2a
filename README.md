@@ -19,6 +19,7 @@
 ###Commit Conventions###
 - fix: fixing a bug
 - add: adding new files and/or functionality
+- remove: remove files and/or functionality
 - change: not fixing but changing code (refactor)
 - docs
 
