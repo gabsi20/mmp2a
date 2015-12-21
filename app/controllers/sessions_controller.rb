@@ -1,14 +1,14 @@
 class SessionsController < ApplicationController
   def new
-  	redirect_to '/auth/facebook'
+  	redirect_to "/auth/#{params["provider"]}"
   end
 
   def create
     auth = request.env["omniauth.auth"]
     user = User.where(:provider => auth['provider'],
-		  :uid => auth['uid']).first ||
-		  User.create_with_omniauth(auth)
-    session[:user_id] = user.id
+      :uid => auth['uid']).first ||
+      User.create_with_omniauth(auth)
+      session[:user_id] = user.id
     redirect_to users_path, :notice => "Signed in!"
   end
 
