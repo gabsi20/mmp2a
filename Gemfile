@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+# API Authentification
+gem 'omniauth', '~> 1.0'
+gem 'omniauth-facebook'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
