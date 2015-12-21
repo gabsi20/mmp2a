@@ -8,7 +8,7 @@
 </head>
 <body>
 <% if user_logged_in %>
-<%=	button_to "Logout", logout_path, method: :get %>
+	<%=	button_to "Logout", logout_path, method: :get %>
 <% end %>
 <%= yield %>
 
