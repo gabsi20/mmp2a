@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 # API Authentification
 gem 'devise'
-gem 'omniauth', '~> 1.0'
+gem 'omniauth-oauth2', '~> 1.3.1'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'omniauth-google-oauth2'
