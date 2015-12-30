@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  def show 
+  def index 
   	render template: "pages/index.html"
   end
   def show 
