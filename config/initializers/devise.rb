@@ -242,7 +242,7 @@ Devise.setup do |config|
     :scope => 'email', :info_fields => 'email,first_name,last_name'
 
   config.omniauth :google_oauth2, ENV["GOOGLE_KEY"], ENV["GOOGLE_SECRET"], {
-    scope: 'email,profile',
+    scope: 'email,profile,https://www.googleapis.com/auth/calendar.readonly',
     access_type: "offline"
   }
 
