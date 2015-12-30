@@ -19,9 +19,17 @@ $(document).ready(function(){
 	$('#burger').click(function(){
 		if($('.main_menu').css("display") == "none"){
 			$('.main_menu').css("display","block");
+			if(($(window).width() > 768)&&($(window).width() < 992)){
+				$('#content').removeClass("col-sm-12");
+				$('#content').addClass("col-sm-8");
+			}
 		}
 		else{
 			$('.main_menu').css("display","none");
+			if(($(window).width() > 768)&&($(window).width() < 992)){
+				$('#content').removeClass("col-sm-8");
+				$('#content').addClass("col-sm-12");
+			}
 		}
 	});
 });
