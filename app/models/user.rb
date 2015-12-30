@@ -9,13 +9,15 @@ class User < ActiveRecord::Base
 	has_and_belongs_to_many :calendars
 
 	def self.from_omniauth auth
-		self.where(:provider => auth['provider'], :uid => auth['uid']).first || self.create_with_omniauth(auth)
+		if t = Token.where(:provider => auth['provider'], :uid => auth['uid']).first()
+			t.user
+		else
+			self.create_with_omniauth(auth)
+		end
 	end
 
 	def self.create_with_omniauth auth
 		create! do |user|
-	    user.provider = auth['provider']
-	    user.uid = auth['uid']
 	    user.password = Devise.friendly_token[0,20]
 	    if auth['info']
 	      user.firstname = auth['info']['first_name'] || ""
