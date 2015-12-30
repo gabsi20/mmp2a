@@ -15,3 +15,13 @@
 //= require twitter/bootstrap
 //= require turbolinks
 //= require_tree .
+$(document).ready(function(){
+	$('#burger').click(function(){
+		if($('.main_menu').css("display") == "none"){
+			$('.main_menu').css("display","block");
+		}
+		else{
+			$('.main_menu').css("display","none");
+		}
+	});
+});

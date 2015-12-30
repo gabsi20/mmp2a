@@ -13,3 +13,72 @@
  *= require_tree .
  *= require_self
  */
+@import url(https://fonts.googleapis.com/css?family=Sonsie+One);
+html, body{
+	margin: 0;
+	padding: 0;
+	color: #333;
+}
+a{
+	text-decoration: none;
+	color: #333;
+}
+a:hover{
+	text-decoration: none;
+	background-color: #fff;
+	color: #333;
+}
+.main_menu{
+	display: none;
+	background-color: #fff;
+}
+.main_menu ul{
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+.main_menu ul li{
+	list-style: none;
+	margin-bottom: 10px;
+	height: 40px;
+	border: 2px solid #ccc;
+	text-align: center;
+	font-size: 2em;
+}
+.main_menu ul li:hover{
+	background-color: #ddd;
+}
+.burgericon{
+	margin: 12px;
+	width: 40px;
+	height: 40px;
+    float: right;
+}
+.profile_pic{
+	width: 60px;
+	margin-right: 12px;
+	float: left;
+	border-radius: 30px;
+	border: 2px solid #9DC7E4;
+}
+.fix{
+	clear: both;
+}
+#header{
+	background: -webkit-linear-gradient(#9DC7E4, #50A5B9); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#9DC7E4, #50A5B9); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#9DC7E4, #50A5B9); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#9DC7E4, #50A5B9); /* Standard syntax */
+    height: 65px;
+}
+h1{
+	font-family: 'Sonsie One', cursive;
+	font-size: 25px;
+	color: #9DC7E4;
+	margin: 5px;
+	text-shadow: 2px  2px 2px #fff,
+                  2px -2px 2px #fff,
+                 -2px  2px 2px #fff,
+                 -2px -2px 2px #fff;
+	width: 50%;
+}

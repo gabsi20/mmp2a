@@ -1,15 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Mmp2a</title>
+  <title>Todoify</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-<% if user_signed_in? %>
-	<%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
-<% end %>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-xs-12" id="header">
+			<%= image_tag "menu.png", :class => "burgericon", :id => "burger" %>
+		</div>
+		<div class="col-xs-12 main_menu">
+			<% if user_signed_in? %>
+
+			<!-- todo google profile pic & check witch provider is logged -->
+
+			<%= image_tag "http://graph.facebook.com/#{current_user.uid}/picture?type=square", :class => "profile_pic" %>
+			<p><%= "Hallo, #{current_user.firstname} #{current_user.lastname}" %></p>
+			<div class="fix"></div>
+			<ul>
+				<li>List</li>
+				<li>Calendar</li>
+				<li>Archive</li>
+				<li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
+			</ul>
+			<% else %>
+			<ul>
+				<li><%= link_to "login", signin_path %></li>
+			</ul>
+			<% end %>
+		</div>
+	</div>
+</div>
+
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
 
