@@ -14,19 +14,43 @@
  *= require_self
  */
 @import url(https://fonts.googleapis.com/css?family=Sonsie+One);
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300italic,700,300);
 html, body{
 	margin: 0;
 	padding: 0;
-	color: #333;
+	color: #777;
+	font-family: 'Roboto', sans-serif;
+}
+p{
+	margin: 0px;
+}
+.title{
+	width: 60%;
+}
+.title h1{
+	font-family: 'Sonsie One', cursive;
+	font-size: 25px;
+	color: #9DC7E4;
+	margin: 5px;
+	text-shadow: 2px  2px 2px #fff,
+                  2px -2px 2px #fff,
+                 -2px  2px 2px #fff,
+                 -2px -2px 2px #fff;
+	width: 50%;
 }
 a{
 	text-decoration: none;
-	color: #333;
+	color: #777;
 }
 a:hover{
 	text-decoration: none;
-	background-color: #fff;
-	color: #333;
+	background-color: initial; 
+	color: #777;
+}
+#theuser{
+	margin-top: 20px;
+	margin-bottom: 20px;
+	height: 60px;
 }
 .main_menu{
 	display: none;
@@ -40,13 +64,17 @@ a:hover{
 .main_menu ul li{
 	list-style: none;
 	margin-bottom: 10px;
-	height: 40px;
+	height: 45px;
 	border: 2px solid #ccc;
 	text-align: center;
-	font-size: 2em;
+	font-size: 25px;
+	box-sizing: border-box;
+	padding: 8px;
+	line-height: 1em;
+	font-weight: 300;
 }
 .main_menu ul li:hover{
-	background-color: #ddd;
+	background-color: #eee;
 }
 .burgericon{
 	margin: 12px;
@@ -70,15 +98,4 @@ a:hover{
     background: -moz-linear-gradient(#9DC7E4, #50A5B9); /* For Firefox 3.6 to 15 */
     background: linear-gradient(#9DC7E4, #50A5B9); /* Standard syntax */
     height: 65px;
-}
-h1{
-	font-family: 'Sonsie One', cursive;
-	font-size: 25px;
-	color: #9DC7E4;
-	margin: 5px;
-	text-shadow: 2px  2px 2px #fff,
-                  2px -2px 2px #fff,
-                 -2px  2px 2px #fff,
-                 -2px -2px 2px #fff;
-	width: 50%;
 }
