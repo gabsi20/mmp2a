@@ -47,6 +47,9 @@ a:hover{
 	background-color: initial; 
 	color: #777;
 }
+#content{
+	padding-top: 20px;
+}
 #theuser{
 	margin-top: 20px;
 	margin-bottom: 20px;
@@ -99,6 +102,26 @@ a:hover{
     background: -moz-linear-gradient(#9DC7E4, #50A5B9); /* For Firefox 3.6 to 15 */
     background: linear-gradient(#9DC7E4, #50A5B9); /* Standard syntax */
     height: 65px;
+}
+.singletask{
+	border: 2px solid #ccc;
+}
+.tasktitle{
+	color: #16B4DD;
+	font-weight: 700;
+	font-size: 1.6em;
+}
+.taskdate{
+	font-weight: 300;
+	font-size: 0.9em;
+}
+.iconbox{
+	text-align: center;
+}
+.iconbox img{
+	width: 40px;
+	height: 40px;
+	margin: 5px;
 }
 @media only screen and (min-width : 768px) {
 	.main_menu{
