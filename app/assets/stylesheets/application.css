@@ -85,6 +85,8 @@ a:hover{
 	width: 40px;
 	height: 40px;
     float: right;
+    border: 2px solid #fff;
+	border-radius: 5px;
 }
 .profile_pic{
 	width: 60px;
