@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151227090620) do
+ActiveRecord::Schema.define(version: 20151230171112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,19 @@ ActiveRecord::Schema.define(version: 20151227090620) do
     t.datetime "updated_at",   null: false
   end
 
+  create_table "tokens", force: :cascade do |t|
+    t.string   "provider"
+    t.string   "token"
+    t.string   "refresh_token"
+    t.date     "expires_at"
+    t.integer  "user_id"
+    t.string   "uid"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "tokens", ["user_id"], name: "index_tokens_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "firstname"
     t.string   "lastname"
@@ -58,15 +71,12 @@ ActiveRecord::Schema.define(version: 20151227090620) do
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.string   "provider"
-    t.string   "uid"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["provider"], name: "index_users_on_provider", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-  add_index "users", ["uid"], name: "index_users_on_uid", using: :btree
 
   add_foreign_key "statuses", "tasks"
   add_foreign_key "statuses", "users"
+  add_foreign_key "tokens", "users"
 end
