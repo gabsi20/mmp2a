@@ -10,11 +10,11 @@
 <body>
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-xs-12 col-md-10 col-sm-12" id="header">
+		<div class="col-xs-12 col-md-9 col-sm-12" id="header">
 			<%= image_tag "menu.png", :class => "burgericon", :id => "burger" %>
 			<div class="title"><h1>Todoify</h1></div>
 		</div>
-		<div class="col-xs-12 col-md-2 col-sm-4 main_menu">
+		<div class="col-xs-12 col-md-3 col-sm-4 main_menu">
 			<% if user_signed_in? %>
 			
 				<!-- todo google profile pic & check witch provider is logged -->
@@ -39,7 +39,7 @@
 				</ul>
 			<% end %>
 		</div>
-		<div id="content" class="col-xs-12 col-sm-12 col-md-10">
+		<div id="content" class="col-xs-12 col-sm-12 col-md-9">
 		<p class="notice"><%= notice %></p>
 		<p class="alert"><%= alert %></p>
 		<%= yield %>
