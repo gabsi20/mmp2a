@@ -12,9 +12,9 @@ default: &default
 
 development:
   <<: *default
-  database: yourdatabase
-  username: yourusername
-  password: yourpassword
+  database: <%= ENV["local_db"] %>
+  username: <%= ENV["local_user"] %>
+  password: <%= ENV["local_pwd"] %>
   host: localhost  
 
 # Warning: The database defined as "test" will be erased and
@@ -25,5 +25,7 @@ development:
 #   database: test
 
 # production:
-#   <<: *default
-#   database: production
+   <<: *default
+   database: <%= ENV["remote_db"] %>
+   password: <%= ENV["remote_pwd"] %>
+   username: <%= ENV["remote_user"] %>
