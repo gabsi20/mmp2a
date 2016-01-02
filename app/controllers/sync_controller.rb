@@ -14,13 +14,13 @@ class SyncController < ApplicationController
     	if(Calendar.where("uid" => calendar["id"]).empty?)
 	    	Calendar.create calendar
 	    	tasks calendar["id"]
-	    	puts "don't\n"
   	  end
     }
+
+    redirect_to tasks_path
 	end
 
 	def tasks uid
-		puts "do\n"
 		task_result = @client.execute( 
 				:api_method => @service.events.list,
 				:parameters => {
