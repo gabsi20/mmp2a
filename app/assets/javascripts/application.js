@@ -18,17 +18,32 @@ $(document).ready(function(){
 	$('#burger').click(function(){
 		if($('.main_menu').css("display") == "none"){
 			$('.main_menu').css("display","block");
-			if(($(window).width() > 768)&&($(window).width() < 992)){
+			if(($(window).width() > 768)&&($(window).width() < 1200)){
 				$('#content').removeClass("col-sm-12");
 				$('#content').addClass("col-sm-8");
 			}
 		}
 		else{
 			$('.main_menu').css("display","none");
-			if(($(window).width() > 768)&&($(window).width() < 992)){
+			if(($(window).width() > 768)&&($(window).width() < 1200)){
 				$('#content').removeClass("col-sm-8");
 				$('#content').addClass("col-sm-12");
 			}
 		}
 	});
+	$('.singletask').click(function(){
+		var a = $(this).attr("id");
+		console.log(a);
+		if($(window).width() > 768){
+			$('.singledetail').css("display","none");
+			$('.singledetail[id="'+a+'"]').css("display","block");
+		}
+		else{
+			console.log("glei is soweit");
+			$('.singledetail').css("display","none");
+			$(this).after($('.singledetail[id="'+a+'"]'));
+			$('.singledetail[id="'+a+'"]').css("display","block");
+		}
+		
+	})
 });

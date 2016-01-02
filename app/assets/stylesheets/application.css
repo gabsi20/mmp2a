@@ -14,7 +14,7 @@
  *= require_self
  */
 @import url(https://fonts.googleapis.com/css?family=Sonsie+One);
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,300italic,700,300);
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300italic,700italic,700,300);
 html, body{
 	margin: 0;
 	padding: 0;
@@ -107,6 +107,7 @@ a:hover{
 }
 .singletask{
 	border: 2px solid #ccc;
+	margin-bottom: 10px;
 }
 .tasktitle{
 	color: #16B4DD;
@@ -125,10 +126,30 @@ a:hover{
 	height: 40px;
 	margin: 5px;
 }
-.task{
+.singledetail{
+	border: 2px solid #ccc;
+	display: none;
+	float: right;
 	margin-bottom: 10px;
 }
+.detail_section_header{
+	font-style: italic;
+	font-weight: 700;
+	margin-bottom: 10px;
+	margin-top: 15px;
+	font-size: 1.2em;
+}
+.detail_member_pic{
+	width: 40px;
+	float: left;
+	margin-right: 10px;
+}
+.detail_member_name{
+	line-height: 40px;
+	vertical-align: center;
+}
 @media only screen and (min-width : 768px) {
+
 	.main_menu{
 		display: none;
 		float: right;
@@ -138,7 +159,8 @@ a:hover{
 		display: block;
 	}
 }
-@media only screen and (min-width : 992px) {
+
+@media only screen and (min-width : 1200px) {
 	.main_menu{
 		display: block;
 		float: right;
