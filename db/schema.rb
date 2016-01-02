@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160102145443) do
+ActiveRecord::Schema.define(version: 20160102155450) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,11 +48,11 @@ ActiveRecord::Schema.define(version: 20160102145443) do
     t.string   "provider"
     t.string   "token"
     t.string   "refresh_token"
-    t.date     "expires_at"
     t.integer  "user_id"
     t.string   "uid"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.datetime "expires_at"
   end
 
   add_index "tokens", ["user_id"], name: "index_tokens_on_user_id", using: :btree
