@@ -56,6 +56,16 @@ ActiveRecord::Schema.define(version: 20151230171112) do
 
   add_index "tokens", ["user_id"], name: "index_tokens_on_user_id", using: :btree
 
+  create_table "tweets", force: :cascade do |t|
+    t.string   "status"
+    t.integer  "zombie_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date     "date"
+  end
+
+  add_index "tweets", ["zombie_id"], name: "index_tweets_on_zombie_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "firstname"
     t.string   "lastname"
@@ -76,7 +86,19 @@ ActiveRecord::Schema.define(version: 20151230171112) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "zombies", force: :cascade do |t|
+    t.string   "name"
+    t.string   "graveyard"
+    t.date     "day_of_death"
+    t.integer  "no_of_arms"
+    t.text     "description"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "password_digest"
+  end
+
   add_foreign_key "statuses", "tasks"
   add_foreign_key "statuses", "users"
   add_foreign_key "tokens", "users"
+  add_foreign_key "tweets", "zombies"
 end

@@ -24,8 +24,9 @@ development:
 #   <<: *default
 #   database: test
 
-# production:
-   <<: *default
-   database: <%= ENV["remote_db"] %>
-   password: <%= ENV["remote_pwd"] %>
-   username: <%= ENV["remote_user"] %>
+production:
+  <<: *default
+  database: <%= ENV["remote_db"] %>
+  username: <%= ENV["remote_user"] %>
+  password: <%= ENV["remote_pwd"] %>
+  host: ec2-54-204-12-25.compute-1.amazonaws.com
