@@ -22,10 +22,10 @@ class SyncController < ApplicationController
 
 	def tasks uid
 		task_result = @client.execute( 
-				:api_method => @service.events.list,
-				:parameters => {
-					'calendarId' => uid
-				}
+			:api_method => @service.events.list,
+			:parameters => {
+				'calendarId' => uid
+			}
     )
 
 		while true
@@ -44,7 +44,8 @@ class SyncController < ApplicationController
 
 	def setup
 		@client = Google::APIClient.new(:application_name => "ToDoify")
-  	@client.authorization.access_token = Token.where(:user => current_user, :provider => "google_oauth2").first.token
+		token = Token.where(:user => current_user, :provider => "google_oauth2").first
+  	@client.authorization.access_token = token.fresh_token
   	@service = @client.discovered_api('calendar', 'v3') 
 	end
 
