@@ -7,6 +7,9 @@ gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'omniauth-google-oauth2'
 
+# API Calls
+gem 'google-api-client', '~> 0.7.1'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
 # Use pg as the database for Active Record
