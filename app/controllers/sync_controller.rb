@@ -42,20 +42,21 @@ class SyncController < ApplicationController
 
 	 events = task_result.data.items
 		puts "menge #{events.count}"
-		  events.each do |e|
-		  	if e.status != "cancelled"
-				  if e.start.date.present?
-			  	  if e.start.date > Time.now
-			        Task.create e, @thisCalendar
-			      end
-		      elsif
-		      	if e.start.dateTime > Time.now
-		      		Task.create e, @thisCalendar
-		      	end
+	  events.each do |e|
+	  	if e.status != "cancelled"
+			  if e.start.date.present?
+		  	  if e.start.date > Time.now
+		        @thisTask = Task.create e, @thisCalendar
+		        Status.create current_user, @thisTask
 		      end
-		    end
-		  end
-	
+	      elsif
+	      	if e.start.dateTime > Time.now
+	      		@thisTask = Task.create e, @thisCalendar
+	      		Status.create current_user, @thisTask
+	      	end
+	      end
+	    end
+	  end
 	end
 
 	def setup
