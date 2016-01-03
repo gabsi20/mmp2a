@@ -9,7 +9,7 @@
 				</div>
 				<div class="col-xs-12 col-sm-6">
 					<p class="detail_section_header">Calendar:</p>
-					<p class="detail_member_name"><strong><%= title %></strong> </p>
+					<p class="detail_member_name"><strong><%= calendar %></strong> </p>
 					<div class="fix"></div>
 				</div>
 			</div>
@@ -30,11 +30,13 @@
 					<% end %>
 				</div>
 			<% end %>
-			<div class="row">
-				<div class="col-xs-12">
-					<p class="detail_section_header">Description:</p>
-					<p><%= description %></p>
-					<br>
+			<% if description != "" %>
+				<div class="row">
+					<div class="col-xs-12">
+						<p class="detail_section_header">Description:</p>
+						<p><%= description %></p>
+					</div>
 				</div>
-			</div>
+			<% end %>
+			<br>
 		</div>
