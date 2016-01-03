@@ -1,14 +1,15 @@
 Rails.application.routes.draw do
-  resources :statuses
-  resources :tasks
+  #resources :statuses
+  #resources :tasks
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
+  get "/tasks" => 'tasks#index'
   get 'welcome/index'
   get 'sync/calendars' => 'sync#calendars'
   get 'sync/select' => 'sync#select'
 
-  resources :calendars
-  resources :users
+  #resources :calendars
+  #resources :users
 
   get '/signin' => 'pages#index'
   get '/' => 'pages#index'
