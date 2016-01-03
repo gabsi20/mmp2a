@@ -2,7 +2,7 @@ class SyncController < ApplicationController
 	before_action :setup
 	require 'google/api_client'
 
-	def calendars
+	def select
 		calendar_result = @client.execute( 
 				:api_method => @service.calendar_list.get,
 				:parameters => {
@@ -10,13 +10,25 @@ class SyncController < ApplicationController
 				}
     )
     
-    calendar_result.data.items.each { |calendar|
-    	if(Calendar.where("uid" => calendar["id"]).empty?)
-	    	Calendar.create calendar
-	    	tasks calendar["id"]
-  	  end
-    }
+    @calendars = calendar_result.data.items
+	end
 
+	def calendars
+		params['selection'].each{ |cid|
+			calendar_result = @client.execute( 
+					:api_method => @service.calendar_list.get,
+					:parameters => {
+						'calendarId' => cid[1]
+					}
+	    )
+
+	    puts "RESULT: #{calendar_result.data}"
+	    
+	    if(Calendar.where("uid" => calendar_result.data["id"]).empty?)
+	    	Calendar.create calendar_result.data
+	    	tasks calendar_result.data["id"]
+  	  end
+  	}
     redirect_to tasks_path
 	end
 

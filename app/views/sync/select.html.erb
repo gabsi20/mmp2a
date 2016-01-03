@@ -1,0 +1,13 @@
+<%= form_tag({controller: "sync", action: "calendars"},method:"get") do %>
+	<table>
+		<% i=0
+		@calendars.each do |calendar| %>
+		  <tr>
+		    <td class="col-xs-2"><%= check_box_tag("selection[#{i}]", checked_value = calendar["id"]) %></td>
+		    <td class="col-xs-10"><%= label_tag("selection[#{i}]", calendar["summary"]) %></td>
+		  </tr>
+		<% i+=1
+		end %>
+	</table>
+	<%= button_tag "Sync" %>
+<% end %>

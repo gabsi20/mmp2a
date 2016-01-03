@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   get 'welcome/index'
   get 'sync/calendars' => 'sync#calendars'
+  get 'sync/select' => 'sync#select'
 
   resources :calendars
   resources :users
