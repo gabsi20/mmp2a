@@ -5,6 +5,7 @@ class TasksController < ApplicationController
   # GET /tasks.json
   def index
     @tasks = Task.all.order(:due)
+    @calendars = Calendar.all
   end
 
   # GET /tasks/1
