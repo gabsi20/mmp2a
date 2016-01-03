@@ -28,20 +28,22 @@ class SyncController < ApplicationController
 			}
     )
 
-		while true
-		  events = task_result.data.items
+	 events = task_result.data.items
+		puts "menge #{events.count}"
 		  events.each do |e|
-		  	if !e["start"]["date"].nil? || e["start"]["date"] > Time.now
-		    	Task.create e
+		  	if e.status != "cancelled"
+			  if e.start.date.present?
+			  	  #if e.start.date > Time.now
+			        Task.create e
+			      #end
+		      elsif
+		      	#if e.start.dateTime > Time.now
+		      		Task.create e
+		      	#end
+		      end
 		    end
 		  end
-		  if !(page_token = task_result.data.next_page_token)
-		    break
-		  end
-		  task_result = client.execute(:api_method => service.events.list,
-		                          :parameters => {'calendarId' => 'primary',
-		                                          'pageToken' => page_token})
-		end
+	
 	end
 
 	def setup

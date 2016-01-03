@@ -4,13 +4,21 @@ class Task < ActiveRecord::Base
 
 	def self.create taskinfo
 		create! do |task|
-			task.title = taskinfo["summary"] || ""
-			task.description = taskinfo["description"] || ""
-			task.autor = taskinfo["creator"]["displayName"] || ""
-			task.due = taskinfo["start"]["date"] || ""
+			task.title = taskinfo.summary || ""
+			task.description = taskinfo.description || ""
+			if taskinfo.creator.present?
+				if taskinfo.creator.displayName.present?
+					task.autor = taskinfo.creator.displayName || ""
+				end
+			end
+			if taskinfo.start.date.present?
+				task.due = taskinfo.start.date || ""
+			else
+				task.due = taskinfo.start.dateTime || ""
+			end
 			participants = Array.new
-			taskinfo["attendees"].each{ |attendee|
-				participants.push attendee["displayName"]
+			taskinfo.attendees.each{ |attendee|
+				participants.push attendee['displayName']
 			}
 			task.participants = participants.join(", ") || ""
 		end 
