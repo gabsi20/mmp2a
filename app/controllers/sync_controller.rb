@@ -31,7 +31,11 @@ class SyncController < ApplicationController
 		while true
 		  events = task_result.data.items
 		  events.each do |e|
-		    Task.create e
+		  	if !e["start"]["date"].nil?
+			  	if e["start"]["date"] > Time.now
+			    	Task.create e
+			    end
+			  end
 		  end
 		  if !(page_token = task_result.data.next_page_token)
 		    break
