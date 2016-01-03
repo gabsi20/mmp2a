@@ -3,8 +3,8 @@ class Calendar < ActiveRecord::Base
 
 	def self.create cal
 		create! do |calendar|
-			calendar.uid = cal["id"]
-			calendar.name = cal["summary"]
+			calendar.uid = cal["id"] || ""
+			calendar.name = cal["summary"] || ""
 		end 
 	end
 end
