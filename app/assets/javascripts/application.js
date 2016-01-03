@@ -33,17 +33,15 @@ $(document).ready(function(){
 	});
 	$('.singletask').click(function(){
 		var a = $(this).attr("id");
-		console.log(a);
 		if($(window).width() > 768){
 			$('.singledetail').css("display","none");
 			$('.singledetail[id="'+a+'"]').css("display","block");
 		}
 		else{
-			console.log("glei is soweit");
 			$('.singledetail').css("display","none");
 			$(this).after($('.singledetail[id="'+a+'"]'));
 			$('.singledetail[id="'+a+'"]').css("display","block");
 		}
 		
-	})
+	});
 });
