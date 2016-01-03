@@ -4,7 +4,12 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all.order(:due)
+    temp = Status.where(:user_id => current_user.id)
+    tasks = Array.new
+    temp.each do |stat|
+      tasks.push Task.find(stat.task_id)
+    end
+    @tasks = tasks
     @calendars = Calendar.all
   end
 
