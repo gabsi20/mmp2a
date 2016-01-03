@@ -33,13 +33,13 @@ class SyncController < ApplicationController
 		  events.each do |e|
 		  	if e.status != "cancelled"
 			  if e.start.date.present?
-			  	  #if e.start.date > Time.now
+			  	  if e.start.date > Time.now
 			        Task.create e
-			      #end
+			      end
 		      elsif
-		      	#if e.start.dateTime > Time.now
+		      	if e.start.dateTime > Time.now
 		      		Task.create e
-		      	#end
+		      	end
 		      end
 		    end
 		  end
