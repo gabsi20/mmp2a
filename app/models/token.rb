@@ -19,12 +19,12 @@ class Token < ActiveRecord::Base
 	  end
 	end
 
-  # refresh token acc. to 
+  # refresh token based on
   # https://www.twilio.com/blog/2014/09/gmail-api-oauth-rails.html
 
   def to_params
     {'refresh_token' => refresh_token,
-    'client_id' => ENV['GOOGLE_ID'],
+    'client_id' => ENV['GOOGLE_KEY'],
     'client_secret' => ENV['GOOGLE_SECRET'],
     'grant_type' => 'refresh_token'}
   end
@@ -38,8 +38,10 @@ class Token < ActiveRecord::Base
     response = request_token_from_google
     data = JSON.parse(response.body)
     update_attributes(
-    access_token: data['access_token'],
-    expires_at: Time.now + (data['expires_in'].to_i).seconds)
+      token: data['access_token'],
+      expires_at: (Time.now + data['expires_in'])
+    )
+    data['access_token']
   end
 
   def expired?
@@ -47,7 +49,10 @@ class Token < ActiveRecord::Base
   end
 
   def fresh_token
-    refresh! if expired?
-    token
+    if expired?
+      refresh! 
+    else
+      self.token
+    end
   end
 end
