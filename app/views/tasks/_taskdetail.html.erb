@@ -1,0 +1,49 @@
+
+		<div class="col-xs-12 col-sm-12 singledetail" id="<%= id %>">
+			<div class="row">
+				<div class="col-xs-12 col-sm-6">
+					<p class="detail_section_header">Author:</p>
+					<%= image_tag "icons/check.png", :class => "detail_member_pic" %>
+					<p class="detail_member_name"><strong><%= author %></strong> </p>
+					<div class="fix"></div>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<p class="detail_section_header">Calendar:</p>
+					<p class="detail_member_name"><strong><%= title %></strong> </p>
+					<div class="fix"></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<p class="detail_section_header">Participants:</p>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<%= participants %>
+					<%= image_tag "icons/check.png", :class => "detail_member_pic" %>
+					<p class="detail_member_name"><strong>Robert Mayer</strong> </p>
+					<div class="fix"></div>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<%= image_tag "icons/check.png", :class => "detail_member_pic" %>
+					<p class="detail_member_name"><strong>Andrea Moser</strong> </p>
+					<div class="fix"></div>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<%= image_tag "icons/check.png", :class => "detail_member_pic" %>
+					<p class="detail_member_name"><strong>Heidi Van der Alm</strong> </p>
+					<div class="fix"></div>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<%= image_tag "icons/check.png", :class => "detail_member_pic" %>
+					<p class="detail_member_name"><strong>Frank Großmaul</strong> </p>
+					<div class="fix"></div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<p class="detail_section_header">Description:</p>
+					<p><%= description %></p>
+					<br>
+				</div>
+			</div>
+		</div>
