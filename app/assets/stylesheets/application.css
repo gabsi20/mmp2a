@@ -141,6 +141,13 @@ a:hover{
 }
 .detail_member_pic{
 	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 25px;
+	border: 2px solid #ccc;
+	border-radius: 20px;
 	float: left;
 	margin-right: 10px;
 }

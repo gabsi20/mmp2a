@@ -3,7 +3,7 @@
 			<div class="row">
 				<div class="col-xs-12 col-sm-6">
 					<p class="detail_section_header">Author:</p>
-					<%= image_tag "icons/check.png", :class => "detail_member_pic" %>
+					<div class="detail_member_pic" style="background-color: <%= "hsl(#{Random.new.rand(255)},100%,80%)"%>"><%= author.slice(0) %></div>
 					<p class="detail_member_name"><strong><%= author %></strong> </p>
 					<div class="fix"></div>
 				</div>
@@ -13,32 +13,23 @@
 					<div class="fix"></div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-xs-12">
-					<p class="detail_section_header">Participants:</p>
+			<% if participants != "" %>
+				<div class="row">
+					<div class="col-xs-12">
+						<p class="detail_section_header">Participants:</p>
+					</div>
+					<%
+						attendees = participants.split(', ')
+					%>
+					<% attendees.each do |attendee| %>
+					<div class="col-xs-12 col-sm-6">
+						<div class="detail_member_pic" style="background-color: <%= "hsl(#{Random.new.rand(255)},100%,80%)"%>"><%= attendee.slice(0) %></div>
+						<p class="detail_member_name"><strong><%= attendee %></strong> </p>
+						<div class="fix"></div>
+					</div>
+					<% end %>
 				</div>
-				<div class="col-xs-12 col-sm-6">
-					<%= participants %>
-					<%= image_tag "icons/check.png", :class => "detail_member_pic" %>
-					<p class="detail_member_name"><strong>Robert Mayer</strong> </p>
-					<div class="fix"></div>
-				</div>
-				<div class="col-xs-12 col-sm-6">
-					<%= image_tag "icons/check.png", :class => "detail_member_pic" %>
-					<p class="detail_member_name"><strong>Andrea Moser</strong> </p>
-					<div class="fix"></div>
-				</div>
-				<div class="col-xs-12 col-sm-6">
-					<%= image_tag "icons/check.png", :class => "detail_member_pic" %>
-					<p class="detail_member_name"><strong>Heidi Van der Alm</strong> </p>
-					<div class="fix"></div>
-				</div>
-				<div class="col-xs-12 col-sm-6">
-					<%= image_tag "icons/check.png", :class => "detail_member_pic" %>
-					<p class="detail_member_name"><strong>Frank Großmaul</strong> </p>
-					<div class="fix"></div>
-				</div>
-			</div>
+			<% end %>
 			<div class="row">
 				<div class="col-xs-12">
 					<p class="detail_section_header">Description:</p>
