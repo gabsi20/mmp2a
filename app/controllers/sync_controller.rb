@@ -27,6 +27,14 @@ class SyncController < ApplicationController
 	    if(Calendar.where("uid" => calendar_result.data["id"]).empty?)
 	    	@thisCalendar = Calendar.create calendar_result.data
 	    	tasks calendar_result.data["id"]
+	    else
+	    	thatCal = Calendar.where("uid" => calendar_result.data["id"]).first
+	    	thatTasks = Task.where(:calendar_id => thatCal.id)
+	    	thatTasks.each{ |task|
+	    		if(Status.where(:task_id => task[:id], :user_id => current_user.id).empty?)
+		    		Status.create current_user, task
+		    	end
+	    	}
   	  end
   	}
     redirect_to tasks_path
@@ -46,13 +54,13 @@ class SyncController < ApplicationController
 	  	if e.status != "cancelled"
 			  if e.start.date.present?
 		  	  if e.start.date > Time.now
-		        @thisTask = Task.create e, @thisCalendar
-		        Status.create current_user, @thisTask
+		        thisTask = Task.create e, @thisCalendar
+		        Status.create current_user, thisTask
 		      end
 	      elsif
 	      	if e.start.dateTime > Time.now
-	      		@thisTask = Task.create e, @thisCalendar
-	      		Status.create current_user, @thisTask
+	      		thisTask = Task.create e, @thisCalendar
+	      		Status.create current_user, thisTask
 	      	end
 	      end
 	    end
