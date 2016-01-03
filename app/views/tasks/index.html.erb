@@ -12,7 +12,7 @@
 </div>
 <div class="col-xs-12 col-sm-6">
 <% @tasks.each do |task| %>
-  <%= render :partial => "taskdetail", :locals => { :title => task.title, 
+  <%= render :partial => "taskdetail", :locals => { :calendar => @calendars.find(task.calendar_id).name, 
                                                     :id => task.id,
                                                     :author => task.autor,
                                                     :description => task.description,
