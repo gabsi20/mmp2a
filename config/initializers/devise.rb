@@ -243,10 +243,7 @@ Devise.setup do |config|
 
   config.omniauth :google_oauth2, ENV["GOOGLE_KEY"], ENV["GOOGLE_SECRET"], {
     scope: "email,profile,https://www.googleapis.com/auth/calendar.readonly",
-    access_type: "offline", client_options: { ssl: { 
-        ca_file: '/usr/lib/ssl/certs/ca-certificates.crt',
-        ca_path: "/etc/ssl/certs"
-    }}
+    access_type: "offline"
   }
 
   # ==> Warden configuration
