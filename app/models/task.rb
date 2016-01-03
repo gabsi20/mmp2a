@@ -1,8 +1,9 @@
 class Task < ActiveRecord::Base
+	belongs_to :calendars
 	has_many :statuses
 	has_many :users, through: :statuses
 
-	def self.create taskinfo
+	def self.create taskinfo, calendar
 		create! do |task|
 			task.title = taskinfo.summary || ""
 			task.description = taskinfo.description || ""
@@ -21,6 +22,7 @@ class Task < ActiveRecord::Base
 				participants.push attendee['displayName']
 			}
 			task.participants = participants.join(", ") || ""
+			task.calendar_id = calendar.id
 		end 
 	end
 end

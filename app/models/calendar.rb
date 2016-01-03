@@ -1,4 +1,5 @@
 class Calendar < ActiveRecord::Base
+	has_many :tasks
 	has_and_belongs_to_many :users
 
 	def self.create cal
