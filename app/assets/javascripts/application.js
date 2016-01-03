@@ -14,7 +14,9 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
-$(document).ready(function(){
+
+
+var ready = function() {
 	$('#burger').click(function(){
 		if($('.main_menu').css("display") == "none"){
 			$('.main_menu').css("display","block");
@@ -33,15 +35,22 @@ $(document).ready(function(){
 	});
 	$('.singletask').click(function(){
 		var a = $(this).attr("id");
-		if($(window).width() > 768){
-			$('.singledetail').css("display","none");
-			$('.singledetail[id="'+a+'"]').css("display","block");
+		var check;
+		if($('.singledetail[id="'+a+'"]').css("display") == "block"){
+			$('.singledetail[id="'+a+'"]').css("display","none");
 		}
 		else{
 			$('.singledetail').css("display","none");
-			$(this).after($('.singledetail[id="'+a+'"]'));
-			$('.singledetail[id="'+a+'"]').css("display","block");
-		}
-		
+			if($(window).width() > 768){
+				$('.singledetail[id="'+a+'"]').css("display","block");
+			}
+			else{
+				$(this).after($('.singledetail[id="'+a+'"]'));
+				$('.singledetail[id="'+a+'"]').css("display","block");
+			}
+		}		
 	});
-});
+}
+
+$(document).on('page:load', ready);
+$(document).ready(ready);
