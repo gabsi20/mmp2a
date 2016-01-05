@@ -4,12 +4,8 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    temp = Status.where(:user_id => current_user.id)
-    tasks = Array.new
-    temp.each do |stat|
-      tasks.push Task.find(stat.task_id)
-    end
-    @tasks = tasks
+    @opentasks = current_user.tasks.where(:id => current_user.statuses.where(:status => "open").map(&:task_id)).order(:due)
+    @closedtasks = current_user.tasks.where(:id => current_user.statuses.where(:status => "closed").map(&:task_id)).order(:due)
     @calendars = Calendar.all
   end
 
