@@ -20,7 +20,7 @@
 	<div class="row">
 		<div class="col-xs-12 col-lg-<%= large %> col-sm-12" id="header">
 			<%= image_tag "menu.png", :class => "burgericon", :id => "burger" %>
-			<div class="title"><h1>Todoify</h1></div>
+			<div class="title"><%= image_tag 'logo.svg' %></div>
 		</div>
 		<div class="col-xs-12 col-lg-<%= largemen %> col-sm-4 main_menu">
 			<% if user_signed_in? %>
