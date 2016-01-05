@@ -33,7 +33,7 @@ var ready = function() {
 			}
 		}
 	});
-	$('.singletask').click(function(){
+	var showinfo = function(){
 		var a = $(this).attr("id");
 		var check;
 		if($('.singledetail[id="'+a+'"]').css("display") == "block"){
@@ -48,9 +48,12 @@ var ready = function() {
 				$(this).after($('.singledetail[id="'+a+'"]'));
 				$('.singledetail[id="'+a+'"]').css("display","block");
 			}
-		}		
-	});
+		}	
+	}
+	$('.singletask').click(showinfo);
+	$('.info').click(showinfo);
 }
+
 
 $(document).on('page:load', ready);
 $(document).ready(ready);
