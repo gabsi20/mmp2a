@@ -1,3 +1,11 @@
+<% if current_user
+			large = 10
+			largemen = 2
+		else
+			large = 12
+			largemen = 0
+		end
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,11 +18,11 @@
 <body>
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-xs-12 col-lg-10 col-sm-12" id="header">
+		<div class="col-xs-12 col-lg-<%= large %> col-sm-12" id="header">
 			<%= image_tag "menu.png", :class => "burgericon", :id => "burger" %>
 			<div class="title"><h1>Todoify</h1></div>
 		</div>
-		<div class="col-xs-12 col-lg-2 col-sm-4 main_menu">
+		<div class="col-xs-12 col-lg-<%= largemen %> col-sm-4 main_menu">
 			<% if user_signed_in? %>
 			
 				<!-- todo google profile pic & check witch provider is logged -->
@@ -32,13 +40,9 @@
 					<li><%= link_to "Archive", tasks_archive_path %></li>
 					<li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
 				</ul>
-			<% else %>
-				<ul>
-					<li><%= link_to "login", signin_path %></li>
-				</ul>
 			<% end %>
 		</div>
-		<div id="content" class="col-xs-12 col-sm-12 col-lg-10">
+		<div id="content" class="col-xs-12 col-sm-12 col-lg-<%= large %>">
 		<p class="notice"><%= notice %></p>
 		<p class="alert"><%= alert %></p>
 		<%= yield %>
