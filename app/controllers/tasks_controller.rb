@@ -30,7 +30,11 @@ class TasksController < ApplicationController
 
   def taskdone
     @status = current_user.statuses.where(:task_id => params[:tid]).first
-    @status.status = 'closed'
+    if @status.status == 'closed'
+      @status.status = 'open'
+    else
+      @status.status = 'closed'
+    end
     respond_to do |format|
       if @status.save
         format.html { redirect_to tasks_path, notice: 'Task checked successfully.'}
