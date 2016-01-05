@@ -5,6 +5,7 @@ class Task < ActiveRecord::Base
 
 	def self.create taskinfo, calendar
 		create! do |task|
+			task.uid = taskinfo.id || ""
 			task.title = taskinfo.summary || ""
 			task.description = taskinfo.description || ""
 			if taskinfo.creator.present?

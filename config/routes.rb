@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'welcome/index'
   get 'sync/calendars' => 'sync#calendars'
   get 'sync/select' => 'sync#select'
+  get 'sync/sync' => 'sync#sync'
 
   post 'task/done' => 'tasks#taskdone'
   post 'task/archive' => 'tasks#taskarchive'

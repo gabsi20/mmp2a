@@ -35,8 +35,8 @@
 				</div>
 				<div class="fix"></div>
 				<ul>
-					<li><%= link_to "List", '/tasks' %></li>
-					<li><%= link_to "+ add Calendar", "/sync/select"%></li>
+					<li><%= link_to "List", sync_sync_path %></li>
+					<li><%= link_to "+ add Calendar", sync_select_path %></li>
 					<li><%= link_to "Archive", tasks_archive_path %></li>
 					<li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
 				</ul>
