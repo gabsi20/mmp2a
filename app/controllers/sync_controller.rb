@@ -49,7 +49,6 @@ class SyncController < ApplicationController
     )
 
 	 events = task_result.data.items
-		puts "menge #{events.count}"
 	  events.each do |e|
 	  	if e.status != "cancelled"
 			  if e.start.date.present?
