@@ -1,12 +1,12 @@
 class User < ActiveRecord::Base
+	has_and_belongs_to_many :calendars
 	has_many :statuses
 	has_many :tasks, through: :statuses
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable
-	has_and_belongs_to_many :calendars
+	# Include default devise modules. Others available are:
+	# :confirmable, :lockable, :timeoutable and :omniauthable
+	devise :database_authenticatable, :registerable,
+	       :recoverable, :rememberable, :trackable, :validatable,
+	       :omniauthable
 
 	def self.from_omniauth auth
 		if t = Token.where(:provider => auth['provider'], :uid => auth['uid']).first()
