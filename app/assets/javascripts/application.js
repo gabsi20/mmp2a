@@ -50,6 +50,10 @@ var ready = function() {
 			}
 		}	
 	}
+	var close = function(){
+		console.log("moterfugger");
+	}
+	$('.right_close').click(showinfo);
 	$('.singletask').click(showinfo);
 	$('.info').click(showinfo);
 }
