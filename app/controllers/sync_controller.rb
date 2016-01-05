@@ -21,14 +21,14 @@ class SyncController < ApplicationController
 						'calendarId' => cid[1]
 					}
 	    )
-
-	    puts "RESULT: #{calendar_result.data}"
 	    
 	    if(Calendar.where("uid" => calendar_result.data["id"]).empty?)
 	    	@thisCalendar = Calendar.create calendar_result.data
+	    	current_user.calendars << @thisCalendar
 	    	tasks calendar_result.data["id"]
 	    else
 	    	thatCal = Calendar.where("uid" => calendar_result.data["id"]).first
+	    	current_user.calendars << thatCal
 	    	thatTasks = Task.where(:calendar_id => thatCal.id)
 	    	thatTasks.each{ |task|
 	    		if(Status.where(:task_id => task[:id], :user_id => current_user.id).empty?)
@@ -64,6 +64,38 @@ class SyncController < ApplicationController
 	      end
 	    end
 	  end
+	end
+
+	def sync
+		current_user.calendars.each{ |calendar|
+			calendar_result = @client.execute( 
+				:api_method => @service.events.list,
+				:parameters => {
+					'calendarId' => calendar.uid
+				}
+	    )
+	    events = calendar_result.data.items
+	    events.each{ |e|
+	    	puts "BLA: #{e.inspect}"
+	    	if Task.where(:uid => e.id).empty?
+	    		if e.status != "cancelled"
+						if e.start.date.present?
+					  	if e.start.date > Time.now
+				        thisTask = Task.create e, calendar
+    						Status.create current_user, thisTask
+    					end
+			      else
+			      	if e.start.dateTime > Time.now
+			      		thisTask = Task.create e, calendar
+    						Status.create current_user, thisTask
+				      end
+				    end
+				  end
+	    	end
+	    }
+		}
+
+		redirect_to tasks_path
 	end
 
 	def setup
