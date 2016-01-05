@@ -2,14 +2,19 @@
 <div class="container-fluid task">
   <div class="row">
     <div class="col-xs-12 col-sm-6">
-    <% @tasks.each do |task| %>
+    <% @opentasks.each do |task| %>
+      <%= render :partial => "task", :locals => { :title => task.title, 
+                                                  :id => task.id,
+                                                  :due => task.due} %>
+    <% end %>
+    <% @closedtasks.each do |task| %>
       <%= render :partial => "task", :locals => { :title => task.title, 
                                                   :id => task.id,
                                                   :due => task.due} %>
     <% end %>
 </div>
 <div class="col-xs-12 col-sm-6">
-<% @tasks.each do |task| %>
+<% @opentasks.each do |task| %>
   <%= render :partial => "taskdetail", :locals => { :calendar => @calendars.find(task.calendar_id).name, 
                                                     :id => task.id,
                                                     :author => task.autor,
