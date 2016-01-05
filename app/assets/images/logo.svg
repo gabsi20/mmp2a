@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:cc="http://creativecommons.org/ns#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+    width="300"
+    height="150"
+	viewBox="100 0 800 200">
+	<linearGradient id="verlauf" x1="0%" y1="60%" x2="100%" y2="0%">
+		<stop offset="0%" stop-color="hsl(190,65%,50%)"></stop>
+		<stop offset="50%" stop-color="hsl(190,80%,70%)"></stop>
+		<stop offset="60%" stop-color="hsl(190,65%,100%)"></stop>
+		<stop offset="70%" stop-color="hsl(190,80%,70%)"></stop>
+	</linearGradient>
+	<text x="50%" y="0px" height="150px" width="25px" font-size="100" fill="hsl(0,0%,100%)" stroke="hsl(0,0%,100%)" stroke-width="25" font-family="Sonsie One" text-anchor="middle">todoify</text>
+	<text x="50%" y="0px" height="150px" width="25px" font-size="100" fill="hsl(190,65%,35%)" stroke="hsl(190,65%,35%)" stroke-width="20" font-family="Sonsie One" text-anchor="middle">todoify</text>
+	<text x="50%" y="0px" height="150px" width="25px" font-size="100" stroke="hsl(190,65%,35%)" stroke-width="5" font-family="Sonsie One" text-anchor="middle">todoify</text>
+	<text x="50%" y="0px" height="150px" width="25px" font-size="100" fill="url(#verlauf)" font-family="Sonsie One" style="text-shadow: 4px 4px 15px #fff;" text-anchor="middle">todoify</text>
+</svg>
