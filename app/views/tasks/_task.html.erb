@@ -7,9 +7,8 @@
 				</div>
 				<div class="col-xs-12 col-sm-6 iconbox">
 	
-				<%= link_to image_tag("icons/check.png", :class => "icons"), task_done_path(:tid => id), method: "post" %> 
-					  
-					<%= image_tag "icons/delete.png", :class => "icons" %>
+					<%= link_to image_tag("icons/check.png", :class => "icons"), task_done_path(:tid => id), method: "post" %> 
+					<%= link_to image_tag("icons/delete.png", :class => "icons"), task_archive_path(:tid => id), method: "post" %> 
 					<%= image_tag "icons/info.png", :class => "icons" %>
 				</div>	
 			</div>

@@ -125,6 +125,11 @@ a:hover{
 	font-size: 1.6em;
 	text-decoration: line-through;
 }
+.tasktitle_archived{
+	color: #6E0000;
+	font-weight: 700;
+	font-size: 1.6em;
+}
 .taskdate{
 	font-weight: 300;
 	font-size: 0.9em;

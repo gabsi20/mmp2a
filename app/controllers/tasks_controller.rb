@@ -9,6 +9,11 @@ class TasksController < ApplicationController
     @calendars = Calendar.all
   end
 
+  def archive
+    @archivedtasks = current_user.tasks.where(:id => current_user.statuses.where(:status => "archived").map(&:task_id)).order(:due)
+    @calendars = Calendar.all
+  end
+
   # GET /tasks/1
   # GET /tasks/1.json
   def show
@@ -33,7 +38,18 @@ class TasksController < ApplicationController
         format.html { redirect_to tasks_path, notice: 'Failure.'}
       end
     end
+  end
 
+  def taskarchive
+    @status = current_user.statuses.where(:task_id => params[:tid]).first
+    @status.status = 'archived'
+    respond_to do |format|
+      if @status.save
+        format.html { redirect_to tasks_path, notice: 'Task archived successfully.'}
+      else
+        format.html { redirect_to tasks_path, notice: 'Failure.'}
+      end
+    end
   end
 
   # POST /tasks

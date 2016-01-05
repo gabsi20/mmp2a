@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get 'sync/select' => 'sync#select'
 
   post 'task/done' => 'tasks#taskdone'
+  post 'task/archive' => 'tasks#taskarchive'
+  get 'tasks/archive' => 'tasks#archive'
   #resources :calendars
   #resources :users
 
