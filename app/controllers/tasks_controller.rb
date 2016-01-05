@@ -23,7 +23,7 @@ class TasksController < ApplicationController
   def edit
   end
 
-  def testmethod
+  def taskdone
     @status = current_user.statuses.where(:task_id => params[:tid]).first
     @status.status = 'closed'
     respond_to do |format|
