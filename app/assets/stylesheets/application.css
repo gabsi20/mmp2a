@@ -114,6 +114,17 @@ a:hover{
 	font-weight: 700;
 	font-size: 1.6em;
 }
+.singletask_done{
+	border: 2px solid #ccc;
+	margin-bottom: 10px;
+	background-color: #eee;
+}
+.tasktitle_done{
+	color: #777;
+	font-weight: 700;
+	font-size: 1.6em;
+	text-decoration: line-through;
+}
 .taskdate{
 	font-weight: 300;
 	font-size: 0.9em;
@@ -154,6 +165,9 @@ a:hover{
 .detail_member_name{
 	line-height: 40px;
 	vertical-align: center;
+}
+.calendar_list_item{
+	border: 2px solid #ccc;
 }
 @media only screen and (min-width : 768px) {
 

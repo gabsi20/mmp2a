@@ -23,6 +23,19 @@ class TasksController < ApplicationController
   def edit
   end
 
+  def testmethod
+    @status = current_user.statuses.where(:task_id => params[:tid]).first
+    @status.status = 'closed'
+    respond_to do |format|
+      if @status.save
+        format.html { redirect_to tasks_path, notice: 'Task checked successfully.'}
+      else
+        format.html { redirect_to tasks_path, notice: 'Failure.'}
+      end
+    end
+
+  end
+
   # POST /tasks
   # POST /tasks.json
   def create

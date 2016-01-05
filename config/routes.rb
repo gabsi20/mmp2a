@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'sync/calendars' => 'sync#calendars'
   get 'sync/select' => 'sync#select'
 
+  post 'task/done' => 'tasks#testmethod'
   #resources :calendars
   #resources :users
 

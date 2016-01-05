@@ -5,12 +5,16 @@
     <% @opentasks.each do |task| %>
       <%= render :partial => "task", :locals => { :title => task.title, 
                                                   :id => task.id,
-                                                  :due => task.due} %>
+                                                  :due => task.due,
+                                                  :cellclass => 'singletask',
+                                                  :titleclass => 'tasktitle'} %>
     <% end %>
     <% @closedtasks.each do |task| %>
       <%= render :partial => "task", :locals => { :title => task.title, 
                                                   :id => task.id,
-                                                  :due => task.due} %>
+                                                  :due => task.due,
+                                                  :cellclass => 'singletask_done',
+                                                  :titleclass => 'tasktitle_done'} %>
     <% end %>
 </div>
 <div class="col-xs-12 col-sm-6">
