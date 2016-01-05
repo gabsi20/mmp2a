@@ -1,18 +1,22 @@
-
-		<div class="col-xs-12 col-sm-12 <%= cellclass %>" id="<%= id %>">
-			<div class="row">
-				<div class="col-xs-12 col-sm-6">
-					<p class="<%= titleclass %>"><%= title %></p>
-					<p class="taskdate"><%= due.strftime("on: %d.%m.%Y - at: %H:%M") %></p>
-				</div>
-				<div class="col-xs-12 col-sm-6 iconbox">
-					<% if showactions %>
-						<%= link_to image_tag("icons/check.png", :class => "icons"), task_done_path(:tid => id), method: "post" %> 
-						<%= link_to image_tag("icons/delete.png", :class => "icons"), task_archive_path(:tid => id), method: "post" %>
-					<% end %>
-					<% if showinformation %>
-						<%= image_tag "icons/info.png", :class => "icons info" %>
-					<% end %>
-				</div>	
-			</div>
+<div class="col-xs-12 col-sm-12 <%= cellclass %>" id="<%= id %>">
+	<div class="row">
+		<div class="col-xs-12 col-sm-6">
+			<p class="<%= titleclass %>"><%= title %></p>
+			<p class="taskdate">
+				<%= due.strftime("on: %d.%m.%Y")%> <% if(due.hour != 0 && due.min != 0) %><%= due.strftime("at: %H:%M") %><% end %>
+			</p>
 		</div>
+		<div class="col-xs-12 col-sm-6 iconbox">
+			<% if showactions %>
+				<%= link_to image_tag("icons/check.png", :class => "icons"), task_done_path(:tid => id), method: "post" %> 
+				<%= link_to image_tag("icons/delete.png", :class => "icons"), task_archive_path(:tid => id), method: "post" %>
+			<% end %>
+			<% if showinformation %>
+				<%= image_tag "icons/info.png", :class => "icons info" %>
+			<% end %>
+			<% if showgetback %>
+				<%= link_to image_tag("icons/back.png", :class => "icons"), task_done_path(:tid => id), method: "post" %>
+			<% end %>
+		</div>	
+	</div>
+</div>

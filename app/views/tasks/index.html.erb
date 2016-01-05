@@ -9,7 +9,8 @@
                                                   :cellclass => 'singletask',
                                                   :titleclass => 'tasktitle',
                                                   :showactions => true,
-                                                  :showinformation => true} %>
+                                                  :showinformation => true,
+                                                  :showgetback => false} %>
     <% end %>
     <% @closedtasks.each do |task| %>
       <%= render :partial => "task", :locals => { :title => task.title, 
@@ -17,8 +18,9 @@
                                                   :due => task.due,
                                                   :cellclass => 'singletask_done',
                                                   :titleclass => 'tasktitle_done',
-                                                  :showactions => true,
-                                                  :showinformation => false} %>
+                                                  :showactions => false,
+                                                  :showinformation => false,
+                                                  :showgetback => true} %>
     <% end %>
 </div>
 <div class="col-xs-12 col-sm-6">

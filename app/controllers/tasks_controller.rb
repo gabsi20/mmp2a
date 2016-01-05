@@ -30,7 +30,7 @@ class TasksController < ApplicationController
 
   def taskdone
     @status = current_user.statuses.where(:task_id => params[:tid]).first
-    if @status.status == 'closed'
+    if @status.status != 'open'
       @status.status = 'open'
     else
       @status.status = 'closed'
