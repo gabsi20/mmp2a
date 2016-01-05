@@ -137,11 +137,15 @@ a:hover{
 .iconbox{
 	text-align: center;
 }
-.iconbox img{
+.icons{
 	width: 40px;
 	height: 40px;
 	margin: 5px;
 	z-index: 99;
+}
+.icons:hover{
+	background-color: #C6EFFF;
+	border-radius: 20px;
 }
 .singledetail{
 	border: 2px solid #ccc;
@@ -207,6 +211,19 @@ a:hover{
 	background-color: #eee;
 	z-index: 99;
 	cursor: pointer;
+}
+.detail_button{
+	line-height: 50px;
+	font-weight: 700;
+	font-size: 1.2em;
+	text-align: center;
+	vertical-align: center;
+	border: 2px solid #ccc;
+	margin-top: 10px;
+	cursor: pointer;
+}
+.detail_button:hover{
+	background-color: #eee;
 }
 @media only screen and (min-width : 768px) {
 
