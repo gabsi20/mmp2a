@@ -1,21 +1,20 @@
-
 <div class="container-fluid task">
   <div class="row">
     <div class="col-xs-12 col-sm-6">
-      <% @archivedtasks.each do |task| %>
+      <% @donetasks.each do |task| %>
         <%= render :partial => "task", :locals => { :title => task.title, 
                                                     :id => task.id,
                                                     :due => task.due,
                                                     :cellclass => 'singletask',
-                                                    :titleclass => 'tasktitle_archived',
+                                                    :titleclass => 'tasktitle_done',
                                                     :showcheck => false,
-                                                    :showarchive => false,
+                                                    :showarchive => true,
                                                     :showinformation => true,
                                                     :showgetback => true} %>
       <% end %>
     </div>
     <div class="col-xs-12 col-sm-6">
-      <% @archivedtasks.each do |task| %>
+      <% @donetasks.each do |task| %>
         <%= render :partial => "taskdetail", :locals => { :calendar => @calendars.find(task.calendar_id).name, 
                                                     :id => task.id,
                                                     :author => task.autor,
@@ -25,4 +24,3 @@
     </div>
   </div>
 </div>
-

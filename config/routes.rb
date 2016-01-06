@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   post 'task/done' => 'tasks#taskdone'
   post 'task/archive' => 'tasks#taskarchive'
   get 'tasks/archive' => 'tasks#archive'
+  get 'tasks/done' => 'tasks#done'
   #resources :calendars
   #resources :users
 

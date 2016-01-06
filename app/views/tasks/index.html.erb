@@ -8,7 +8,8 @@
                                                   :due => task.due,
                                                   :cellclass => 'singletask',
                                                   :titleclass => 'tasktitle',
-                                                  :showactions => true,
+                                                  :showcheck => true,
+                                                  :showarchive => true,
                                                   :showinformation => true,
                                                   :showgetback => false} %>
     <% end %>
@@ -18,7 +19,8 @@
                                                   :due => task.due,
                                                   :cellclass => 'singletask_done',
                                                   :titleclass => 'tasktitle_done',
-                                                  :showactions => false,
+                                                  :showcheck => false,
+                                                  :showarchive => true,
                                                   :showinformation => false,
                                                   :showgetback => true} %>
     <% end %>
