@@ -1,10 +1,10 @@
 <% if current_user
-			large = 10
-			largemen = 2
-		else
-			large = 12
-			largemen = 0
-		end
+      large = 10
+      largemen = 2
+    else
+      large = 12
+      largemen = 0
+    end
 %>
 <!DOCTYPE html>
 <html>
@@ -17,42 +17,42 @@
 </head>
 <body>
 <div class="container-fluid">
-	<div class="row">
-		<div class="col-xs-12 col-lg-<%= large %> col-sm-12" id="header">
-			<%= image_tag "menu.png", :class => "burgericon", :id => "burger" %>
-			<div class="title"><h1>Todoify</h1></div>
-		</div>
-		<div class="col-xs-12 col-lg-<%= largemen %> col-sm-4 main_menu">
-			<% if user_signed_in? %>
-			
-				<!-- todo google profile pic & check witch provider is logged -->
-				<div id="theuser">
-					<%= image_tag "#{current_user.image}", :class => "profile_pic" %>
-					<br>
-					<p>Hallo,</p>
-					<p><strong><%= "#{current_user.firstname} #{current_user.lastname}" %></strong> </p>
-				</div>
-				<div class="fix"></div>
-				<ul>
-					<%= link_to(sync_sync_path) do %><li id="listlink"><%= image_tag 'loading.gif', :id => "listlink_loader" %>List</li><% end %>
-					<%= link_to(tasks_done_path) do %><li>Done Tasks</li><% end %>
-					<%= link_to(tasks_archive_path) do %><li>Archive</li><% end %>
-					<%= link_to(sync_select_path) do %><li>Manage Calendars</li><% end %>
-					<%= link_to(destroy_user_session_path, :method => :delete) do %><li>Logout</li><% end %>
-				</ul>
-			<% end %>
-		</div>
-		<div id="content" class="col-xs-12 col-sm-12 col-lg-<%= large %>">
-			<% if(notice != nil || alert != nil) %>
-				<div class="row">
-					<div class="col-xs-0 col-sm-3 col-lg-4"></div>
-					<div class="col-xs-12 col-sm-6 col-lg-4 notice"><%= notice %><%= alert %></div>
-					<div class="col-xs-0 col-sm-3 col-lg-4"></div>
-				</div>
-			<% end %>
-			<%= yield %>
-		</div>
-	</div>
+  <div class="row">
+    <div class="col-xs-12 col-lg-<%= large %> col-sm-12" id="header">
+      <%= image_tag "menu.png", :class => "burgericon", :id => "burger" %>
+      <div class="title"><h1>Todoify</h1></div>
+    </div>
+    <div class="col-xs-12 col-lg-<%= largemen %> col-sm-4 main_menu">
+      <% if user_signed_in? %>
+      
+        <!-- todo google profile pic & check witch provider is logged -->
+        <div id="theuser">
+          <%= image_tag "#{current_user.image}", :class => "profile_pic" %>
+          <br>
+          <p>Hallo,</p>
+          <p><strong><%= "#{current_user.firstname} #{current_user.lastname}" %></strong> </p>
+        </div>
+        <div class="fix"></div>
+        <ul>
+          <%= link_to(sync_sync_path) do %><li id="listlink"><%= image_tag 'loading.gif', :id => "listlink_loader" %>List</li><% end %>
+          <%= link_to(tasks_done_path) do %><li>Done Tasks</li><% end %>
+          <%= link_to(tasks_archive_path) do %><li>Archive</li><% end %>
+          <%= link_to(sync_select_path) do %><li>Manage Calendars</li><% end %>
+          <%= link_to(destroy_user_session_path, :method => :delete) do %><li>Logout</li><% end %>
+        </ul>
+      <% end %>
+    </div>
+    <div id="content" class="col-xs-12 col-sm-12 col-lg-<%= large %>">
+      <% if(notice != nil || alert != nil) %>
+        <div class="row">
+          <div class="col-xs-0 col-sm-3 col-lg-4"></div>
+          <div class="col-xs-12 col-sm-6 col-lg-4 notice"><%= notice %><%= alert %></div>
+          <div class="col-xs-0 col-sm-3 col-lg-4"></div>
+        </div>
+      <% end %>
+      <%= yield %>
+    </div>
+  </div>
 
 
 

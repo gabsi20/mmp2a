@@ -1,21 +1,21 @@
 <div class="container-fluid sync">
-	<div class="row">
-		<div class="col-xs-0 col-sm-3 col-lg-4"></div>
-		<div class="col-xs-12 col-sm-6 col-lg-4">
-			<%= form_tag({controller: "sync", action: "calendars"},method:"get") do %>
-				<div class="container-fluid">
-					<% i=0
-					@calendars.each do |calendar| %>
-					  <div class="row singlecalendar">
-					    <div class="col-xs-2 calendar_checkbox"><%= check_box_tag("selection[#{i}]", checked_value = calendar["id"], @exist.any?{|item| item.uid == calendar["id"]}) %></div>
-					    <div class="col-xs-10 tasktitle"><%= label_tag("selection[#{i}]", calendar["summary"]) %></div>
-					  </div>
-					<% i+=1
-					end %>
-				</div>
-				<%= button_tag "Sync", :class => "syncbutton" %>
-			<% end %>
-		</div>
-		<div class="col-xs-0 col-sm-3 col-lg-4"></div>
-	</div>
+  <div class="row">
+    <div class="col-xs-0 col-sm-3 col-lg-4"></div>
+    <div class="col-xs-12 col-sm-6 col-lg-4">
+      <%= form_tag({controller: "sync", action: "calendars"},method:"get") do %>
+        <div class="container-fluid">
+          <% i=0
+          @calendars.each do |calendar| %>
+            <div class="row singlecalendar">
+              <div class="col-xs-2 calendar_checkbox"><%= check_box_tag("selection[#{i}]", checked_value = calendar["id"], @exist.any?{|item| item.uid == calendar["id"]}) %></div>
+              <div class="col-xs-10 tasktitle"><%= label_tag("selection[#{i}]", calendar["summary"]) %></div>
+            </div>
+          <% i+=1
+          end %>
+        </div>
+        <%= button_tag "Sync", :class => "syncbutton" %>
+      <% end %>
+    </div>
+    <div class="col-xs-0 col-sm-3 col-lg-4"></div>
+  </div>
 </div>

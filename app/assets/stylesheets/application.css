@@ -16,282 +16,282 @@
 @import url(https://fonts.googleapis.com/css?family=Sonsie+One);
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300italic,700italic,700,300);
 html, body{
-	margin: 0;
-	padding: 0;
-	color: #777;
-	font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #777;
+  font-family: 'Roboto', sans-serif;
 }
 p{
-	margin: 0px;
+  margin: 0px;
 }
 .title{
-	width: 60%;
+  width: 60%;
 }
 .title h1{
-	font-family: 'Sonsie One', cursive;
-	font-size: 25px;
-	color: #9DC7E4;
-	margin: 5px;
-	text-shadow: 2px  2px 2px #fff,
+  font-family: 'Sonsie One', cursive;
+  font-size: 25px;
+  color: #9DC7E4;
+  margin: 5px;
+  text-shadow: 2px  2px 2px #fff,
                   2px -2px 2px #fff,
                  -2px  2px 2px #fff,
                  -2px -2px 2px #fff;
-	width: 50%;
+  width: 50%;
 }
 a{
-	text-decoration: none;
-	color: #777;
+  text-decoration: none;
+  color: #777;
 }
 a:hover{
-	text-decoration: none;
-	background-color: initial; 
-	color: #777;
+  text-decoration: none;
+  background-color: initial; 
+  color: #777;
 }
 #content{
-	padding-top: 20px;
+  padding-top: 20px;
 }
 #theuser{
-	margin-top: 20px;
-	margin-bottom: 20px;
-	height: 60px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  height: 60px;
 }
 .main_menu{
-	display: none;
-	background-color: #fff;
+  display: none;
+  background-color: #fff;
 }
 .main_menu ul{
-	width: 100%;
-	margin: 0px;
-	padding: 0px;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
 }
 .main_menu ul li{
-	list-style: none;
-	margin-bottom: 10px;
-	height: 45px;
-	border: 2px solid #ccc;
-	text-align: center;
-	font-size: 23px;
-	box-sizing: border-box;
-	padding: 8px;
-	line-height: 1em;
-	font-weight: 300;
+  list-style: none;
+  margin-bottom: 10px;
+  height: 45px;
+  border: 2px solid #ccc;
+  text-align: center;
+  font-size: 23px;
+  box-sizing: border-box;
+  padding: 8px;
+  line-height: 1em;
+  font-weight: 300;
 }
 .main_menu ul li:hover{
-	background-color: #eee;
+  background-color: #eee;
 }
 .burgericon{
-	display: block;
-	margin: 12px;
-	width: 40px;
-	height: 40px;
+  display: block;
+  margin: 12px;
+  width: 40px;
+  height: 40px;
     float: right;
     border: 2px solid #fff;
-	border-radius: 5px;
-	z-index: 999;
+  border-radius: 5px;
+  z-index: 999;
 }
 #burger{
-	z-index: 999;
+  z-index: 999;
 }
 .profile_pic{
-	width: 60px;
-	margin-right: 12px;
-	float: left;
-	border-radius: 30px;
-	border: 2px solid #9DC7E4;
+  width: 60px;
+  margin-right: 12px;
+  float: left;
+  border-radius: 30px;
+  border: 2px solid #9DC7E4;
 }
 .fix{
-	clear: both;
+  clear: both;
 }
 #header{
-	background: -webkit-linear-gradient(#9DC7E4, #50A5B9); /* For Safari 5.1 to 6.0 */
+  background: -webkit-linear-gradient(#9DC7E4, #50A5B9); /* For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#9DC7E4, #50A5B9); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#9DC7E4, #50A5B9); /* For Firefox 3.6 to 15 */
     background: linear-gradient(#9DC7E4, #50A5B9); /* Standard syntax */
     height: 65px;
 }
 .singletask{
-	border: 2px solid #ccc;
-	margin-bottom: 10px;
+  border: 2px solid #ccc;
+  margin-bottom: 10px;
 }
 .tasktitle{
-	color: #16B4DD;
-	font-weight: 700;
-	font-size: 1.6em;
-	overflow: hidden;
+  color: #16B4DD;
+  font-weight: 700;
+  font-size: 1.6em;
+  overflow: hidden;
     text-overflow: ellipsis;
 }
 .singletask_done{
-	border: 2px solid #ccc;
-	margin-bottom: 10px;
-	background-color: #eee;
+  border: 2px solid #ccc;
+  margin-bottom: 10px;
+  background-color: #eee;
 }
 .tasktitle_done{
-	color: #777;
-	font-weight: 700;
-	font-size: 1.6em;
-	text-decoration: line-through;
+  color: #777;
+  font-weight: 700;
+  font-size: 1.6em;
+  text-decoration: line-through;
 }
 .tasktitle_archived{
-	color: #6E0000;
-	font-weight: 700;
-	font-size: 1.6em;
+  color: #6E0000;
+  font-weight: 700;
+  font-size: 1.6em;
 }
 .taskdate{
-	font-weight: 300;
-	font-size: 0.9em;
+  font-weight: 300;
+  font-size: 0.9em;
 }
 .iconbox{
-	text-align: center;
+  text-align: center;
 }
 .icons{
-	width: 40px;
-	height: 40px;
-	margin: 5px;
-	z-index: 99;
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+  z-index: 99;
 }
 .icons:hover{
-	background-color: #C6EFFF;
-	border-radius: 20px;
+  background-color: #C6EFFF;
+  border-radius: 20px;
 }
 .singledetail{
-	border: 2px solid #ccc;
-	display: none;
-	float: right;
-	margin-bottom: 10px;
+  border: 2px solid #ccc;
+  display: none;
+  float: right;
+  margin-bottom: 10px;
 }
 .detail_section_header{
-	font-style: italic;
-	font-weight: 700;
-	margin-bottom: 10px;
-	margin-top: 15px;
-	font-size: 1.2em;
+  font-style: italic;
+  font-weight: 700;
+  margin-bottom: 10px;
+  margin-top: 15px;
+  font-size: 1.2em;
 }
 .detail_member_pic{
-	width: 40px;
-	height: 40px;
-	line-height: 40px;
-	text-align: center;
-	vertical-align: middle;
-	font-size: 25px;
-	border: 2px solid #ccc;
-	border-radius: 20px;
-	float: left;
-	margin-right: 10px;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 25px;
+  border: 2px solid #ccc;
+  border-radius: 20px;
+  float: left;
+  margin-right: 10px;
 }
 .detail_member_name{
-	line-height: 40px;
-	vertical-align: center;
+  line-height: 40px;
+  vertical-align: center;
 }
 .calendar_list_item{
-	border: 2px solid #ccc;
+  border: 2px solid #ccc;
 }
 .info{
-	cursor: pointer;
+  cursor: pointer;
 }
 .provider_logo{
-	width: 50px;
-	height: 50px;
+  width: 50px;
+  height: 50px;
 }
 .provider{
-	line-height: 50px;
-	vertical-align: middle;
-	text-align: center;
+  line-height: 50px;
+  vertical-align: middle;
+  text-align: center;
 }
 .provider a{
-	font-size: 1.2em;
-	font-weight: 700
+  font-size: 1.2em;
+  font-weight: 700
 }
 .right_close{
-	position: absolute;
-	right: 3px;
-	top: 3px;
-	font-size: 2em;
-	line-height: 0.6em;
-	width: 30px;
-	height: 30px;
-	padding: 3px;
-	border: 2px solid #ccc;
-	display: block;
-	text-align: center;
-	vertical-align: middle;
-	background-color: #eee;
-	z-index: 99;
-	cursor: pointer;
+  position: absolute;
+  right: 3px;
+  top: 3px;
+  font-size: 2em;
+  line-height: 0.6em;
+  width: 30px;
+  height: 30px;
+  padding: 3px;
+  border: 2px solid #ccc;
+  display: block;
+  text-align: center;
+  vertical-align: middle;
+  background-color: #eee;
+  z-index: 99;
+  cursor: pointer;
 }
 .detail_button{
-	line-height: 50px;
-	font-weight: 700;
-	font-size: 1.2em;
-	text-align: center;
-	vertical-align: center;
-	border: 2px solid #ccc;
-	margin-top: 10px;
-	cursor: pointer;
+  line-height: 50px;
+  font-weight: 700;
+  font-size: 1.2em;
+  text-align: center;
+  vertical-align: center;
+  border: 2px solid #ccc;
+  margin-top: 10px;
+  cursor: pointer;
 }
 .detail_button:hover{
-	background-color: #eee;
+  background-color: #eee;
 }
 .detail_button:hover .icons{
-	background-color: #C6EFFF;
-	border-radius: 20px;
+  background-color: #C6EFFF;
+  border-radius: 20px;
 }
 .notice{
-	line-height: 30px;
-	background-color: #C6EFFF;
-	text-align: center;
-	margin-bottom: 10px;
+  line-height: 30px;
+  background-color: #C6EFFF;
+  text-align: center;
+  margin-bottom: 10px;
 }
 .singlecalendar{
-	line-height: 40px;
-	border: 2px solid #ccc;
-	margin-bottom: 10px;
+  line-height: 40px;
+  border: 2px solid #ccc;
+  margin-bottom: 10px;
 }
 .syncbutton{
-	width: 100%;
-	line-height: 40px;
-	background-color: #eee;
-	border: 2px solid #ccc;
-	font-size: 1.2em;
-	font-weight: 700;
+  width: 100%;
+  line-height: 40px;
+  background-color: #eee;
+  border: 2px solid #ccc;
+  font-size: 1.2em;
+  font-weight: 700;
 }
 .syncbutton:hover{
-	background-color: #C6EFFF;
+  background-color: #C6EFFF;
 }
 .calendar_checkbox{
-	text-align: center;
+  text-align: center;
 }
 #listlink_loader{
-	display: none;
-	margin-right: 15px;
+  display: none;
+  margin-right: 15px;
 }
 .detailtitle{
-	display: none;
-	margin-top: 10px;
+  display: none;
+  margin-top: 10px;
 }
 @media only screen and (min-width : 768px) {
 
-	.main_menu{
-		display: none;
-		float: right;
+  .main_menu{
+    display: none;
+    float: right;
 
-	}
-	.burgericon{
-		display: block;
-	}
-	.detailtitle{
-		display: block;
-	}
+  }
+  .burgericon{
+    display: block;
+  }
+  .detailtitle{
+    display: block;
+  }
 }
 
 @media only screen and (min-width : 1200px) {
-	.main_menu{
-		display: block;
-		float: right;
-	}
-	.burgericon{
-		display: none;
-	}
-	.detailtitle{
-		display: block;
-	}
+  .main_menu{
+    display: block;
+    float: right;
+  }
+  .burgericon{
+    display: none;
+  }
+  .detailtitle{
+    display: block;
+  }
 }
