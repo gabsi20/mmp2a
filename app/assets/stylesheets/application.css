@@ -225,6 +225,10 @@ a:hover{
 .detail_button:hover{
 	background-color: #eee;
 }
+.detail_button:hover .icons{
+	background-color: #C6EFFF;
+	border-radius: 20px;
+}
 .notice{
 	line-height: 30px;
 	background-color: #C6EFFF;
