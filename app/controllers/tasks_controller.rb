@@ -14,6 +14,11 @@ class TasksController < ApplicationController
     @calendars = Calendar.all
   end
 
+  def done
+    @donetasks = current_user.tasks.where(:id => current_user.statuses.where(:status => "closed").map(&:task_id)).order(:due)
+    @calendars = Calendar.all
+  end
+
   # GET /tasks/1
   # GET /tasks/1.json
   def show
