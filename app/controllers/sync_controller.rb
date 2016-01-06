@@ -10,10 +10,14 @@ class SyncController < ApplicationController
 				}
     )
     
+    @exist = current_user.calendars
     @calendars = calendar_result.data.items
 	end
 
 	def calendars
+		puts "hey"
+		unsync params['selection']
+
 		params['selection'].each{ |cid|
 			calendar_result = @client.execute( 
 					:api_method => @service.calendar_list.get,
@@ -28,16 +32,28 @@ class SyncController < ApplicationController
 	    	tasks calendar_result.data["id"]
 	    else
 	    	thatCal = Calendar.where("uid" => calendar_result.data["id"]).first
-	    	current_user.calendars << thatCal
 	    	thatTasks = Task.where(:calendar_id => thatCal.id)
 	    	thatTasks.each{ |task|
 	    		if(Status.where(:task_id => task[:id], :user_id => current_user.id).empty?)
 		    		Status.create current_user, task
+		    		current_user.calendars << thatCal
 		    	end
 	    	}
   	  end
   	}
     redirect_to tasks_path
+	end
+
+	def unsync selected
+		exist = current_user.calendars
+		exist.each{ |cal|
+			if !(selected.any?{ |selectedmap| selectedmap[1] == cal.uid})
+				cal.users.clear
+				cal.tasks.each{ |mytask| 
+					Status.where(:user_id => current_user, :task_id => mytask).first.destroy
+				}
+			end
+		}
 	end
 
 	def tasks uid
@@ -76,7 +92,6 @@ class SyncController < ApplicationController
 	    )
 	    events = calendar_result.data.items
 	    events.each{ |e|
-	    	puts "BLA: #{e.inspect}"
 	    	if Task.where(:uid => e.id).empty?
 	    		if e.status != "cancelled"
 						if e.start.date.present?

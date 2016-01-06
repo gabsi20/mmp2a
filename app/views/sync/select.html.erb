@@ -7,7 +7,7 @@
 					<% i=0
 					@calendars.each do |calendar| %>
 					  <div class="row singlecalendar">
-					    <div class="col-xs-2 calendar_checkbox"><%= check_box_tag("selection[#{i}]", checked_value = calendar["id"]) %></div>
+					    <div class="col-xs-2 calendar_checkbox"><%= check_box_tag("selection[#{i}]", checked_value = calendar["id"], @exist.any?{|item| item.uid == calendar["id"]}) %></div>
 					    <div class="col-xs-10 tasktitle"><%= label_tag("selection[#{i}]", calendar["summary"]) %></div>
 					  </div>
 					<% i+=1
