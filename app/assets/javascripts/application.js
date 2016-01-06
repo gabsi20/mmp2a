@@ -55,7 +55,7 @@ var ready = function() {
 	}
 	$('#listlink').click(function(){
 		$('#listlink_loader').css("display","inline");
-	})
+	});
 	$('.right_close').click(showinfo);
 	$('.singletask').click(showinfo);
 	$('.info').click(showinfo);
