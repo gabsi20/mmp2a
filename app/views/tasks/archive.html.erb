@@ -17,10 +17,13 @@
     <div class="col-xs-12 col-sm-6">
       <% @archivedtasks.each do |task| %>
         <%= render :partial => "taskdetail", :locals => { :calendar => @calendars.find(task.calendar_id).name, 
-                                                    :id => task.id,
-                                                    :author => task.autor,
-                                                    :description => task.description,
-                                                    :participants => task.participants} %>
+                                                          :title => task.title, 
+                                                          :id => task.id,
+                                                          :due => task.due,
+                                                          :titleclass => 'tasktitle_archived',
+                                                          :author => task.autor,
+                                                          :description => task.description,
+                                                          :participants => task.participants} %>
       <% end %>
     </div>
   </div>

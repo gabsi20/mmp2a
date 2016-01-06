@@ -264,6 +264,10 @@ a:hover{
 	display: none;
 	margin-right: 15px;
 }
+.detailtitle{
+	display: none;
+	margin-top: 10px;
+}
 @media only screen and (min-width : 768px) {
 
 	.main_menu{
@@ -274,7 +278,9 @@ a:hover{
 	.burgericon{
 		display: block;
 	}
-
+	.detailtitle{
+		display: block;
+	}
 }
 
 @media only screen and (min-width : 1200px) {
@@ -284,5 +290,8 @@ a:hover{
 	}
 	.burgericon{
 		display: none;
+	}
+	.detailtitle{
+		display: block;
 	}
 }

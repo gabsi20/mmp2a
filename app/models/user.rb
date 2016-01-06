@@ -23,6 +23,7 @@ class User < ActiveRecord::Base
 	      user.firstname = auth['info']['first_name'] || ""
 	      user.lastname = auth['info']['last_name'] || ""
 	      user.email = auth['info']['email'] || ""
+	      user.image = auth['info']['image'] || ""
 	    end
 	  end
 	end
