@@ -37,12 +37,14 @@ class TasksController < ApplicationController
     @status = current_user.statuses.where(:task_id => params[:tid]).first
     if @status.status != 'open'
       @status.status = 'open'
+      @message = "Task reactivated successfully."
     else
       @status.status = 'closed'
+      @message = "Task checked successfully."
     end
     respond_to do |format|
       if @status.save
-        format.html { redirect_to tasks_path, notice: 'Task checked successfully.'}
+        format.html { redirect_to tasks_path, notice: @message}
       else
         format.html { redirect_to tasks_path, notice: 'Failure.'}
       end
