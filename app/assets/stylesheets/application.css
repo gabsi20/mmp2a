@@ -256,6 +256,9 @@ a:hover{
 .calendar_checkbox{
 	text-align: center;
 }
+#listlink_loader{
+	display: none;
+}
 @media only screen and (min-width : 768px) {
 
 	.main_menu{
