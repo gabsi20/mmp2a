@@ -70,7 +70,7 @@ a:hover{
 	height: 45px;
 	border: 2px solid #ccc;
 	text-align: center;
-	font-size: 25px;
+	font-size: 23px;
 	box-sizing: border-box;
 	padding: 8px;
 	line-height: 1em;
@@ -87,6 +87,10 @@ a:hover{
     float: right;
     border: 2px solid #fff;
 	border-radius: 5px;
+	z-index: 999;
+}
+#burger{
+	z-index: 999;
 }
 .profile_pic{
 	width: 60px;
@@ -269,6 +273,7 @@ a:hover{
 	.burgericon{
 		display: block;
 	}
+
 }
 
 @media only screen and (min-width : 1200px) {
