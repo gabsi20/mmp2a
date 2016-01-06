@@ -50,9 +50,6 @@ var ready = function() {
 			}
 		}	
 	}
-	var close = function(){
-		console.log("moterfugger");
-	}
 	$('#listlink').click(function(){
 		$('#listlink_loader').css("display","inline");
 	});
