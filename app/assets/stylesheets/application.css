@@ -225,6 +225,12 @@ a:hover{
 .detail_button:hover{
 	background-color: #eee;
 }
+.notice{
+	line-height: 30px;
+	background-color: #C6EFFF;
+	text-align: center;
+	margin-bottom: 10px;
+}
 @media only screen and (min-width : 768px) {
 
 	.main_menu{

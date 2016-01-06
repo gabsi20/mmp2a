@@ -35,16 +35,21 @@
 				</div>
 				<div class="fix"></div>
 				<ul>
-					<li><%= link_to "List", sync_sync_path %></li>
-					<li><%= link_to "+ add Calendar", sync_select_path %></li>
-					<li><%= link_to "Archive", tasks_archive_path %></li>
-					<li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
+					<%= link_to(sync_sync_path) do %><li>List</li><% end %>
+					<%= link_to(sync_select_path) do %><li>+ add Calendar</li><% end %>
+					<%= link_to(tasks_archive_path) do %><li>Archive</li><% end %>
+					<%= link_to(destroy_user_session_path, :method => :delete) do %><li>Logout</li><% end %>
 				</ul>
 			<% end %>
 		</div>
 		<div id="content" class="col-xs-12 col-sm-12 col-lg-<%= large %>">
-		<p class="notice"><%= notice %></p>
-		<p class="alert"><%= alert %></p>
+		<% if(notice != nil || alert != nil) %>
+		<div class="row">
+			<div class="col-xs-0 col-sm-3 col-lg-4"></div>
+			<div class="col-xs-12 col-sm-6 col-lg-4 notice"><%= notice %><%= alert %></div>
+			<div class="col-xs-0 col-sm-3 col-lg-4"></div>
+		</div>
+		<% end %>
 		<%= yield %>
 	</div>
 	</div>
