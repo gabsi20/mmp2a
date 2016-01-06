@@ -113,6 +113,8 @@ a:hover{
 	color: #16B4DD;
 	font-weight: 700;
 	font-size: 1.6em;
+	overflow: hidden;
+    text-overflow: ellipsis;
 }
 .singletask_done{
 	border: 2px solid #ccc;
@@ -234,6 +236,25 @@ a:hover{
 	background-color: #C6EFFF;
 	text-align: center;
 	margin-bottom: 10px;
+}
+.singlecalendar{
+	line-height: 40px;
+	border: 2px solid #ccc;
+	margin-bottom: 10px;
+}
+.syncbutton{
+	width: 100%;
+	line-height: 40px;
+	background-color: #eee;
+	border: 2px solid #ccc;
+	font-size: 1.2em;
+	font-weight: 700;
+}
+.syncbutton:hover{
+	background-color: #C6EFFF;
+}
+.calendar_checkbox{
+	text-align: center;
 }
 @media only screen and (min-width : 768px) {
 
