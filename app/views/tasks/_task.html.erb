@@ -8,16 +8,16 @@
 		</div>
 		<div class="col-xs-12 col-sm-6 iconbox">
 			<% if showcheck %>
-				<%= link_to image_tag("icons/check.png", :class => "icons"), task_done_path(:tid => id), method: "post" %>
+				<%= link_to image_tag("icons/check.png", :class => "icons"), task_done_path(:tid => id) %>
 			<% end %>
 			<% if showarchive %>
-				<%= link_to image_tag("icons/delete.png", :class => "icons"), task_archive_path(:tid => id), method: "post" %>
+				<%= link_to image_tag("icons/delete.png", :class => "icons"), task_archive_path(:tid => id) %>
 			<% end %>
 			<% if showinformation %>
 				<%= image_tag "icons/info.png", :class => "icons info" %>
 			<% end %>
 			<% if showgetback %>
-				<%= link_to image_tag("icons/back.png", :class => "icons"), task_done_path(:tid => id), method: "post" %>
+				<%= link_to image_tag("icons/back.png", :class => "icons"), task_done_path(:tid => id) %>
 			<% end %>
 		</div>	
 	</div>
