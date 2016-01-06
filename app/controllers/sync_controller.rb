@@ -18,36 +18,41 @@ class SyncController < ApplicationController
 		puts "hey"
 		unsync params['selection']
 
-		params['selection'].each{ |cid|
-			calendar_result = @client.execute( 
-					:api_method => @service.calendar_list.get,
-					:parameters => {
-						'calendarId' => cid[1]
-					}
-	    )
-	    
-	    if(Calendar.where("uid" => calendar_result.data["id"]).empty?)
-	    	@thisCalendar = Calendar.create calendar_result.data
-	    	current_user.calendars << @thisCalendar
-	    	tasks calendar_result.data["id"]
-	    else
-	    	thatCal = Calendar.where("uid" => calendar_result.data["id"]).first
-	    	thatTasks = Task.where(:calendar_id => thatCal.id)
-	    	thatTasks.each{ |task|
-	    		if(Status.where(:task_id => task[:id], :user_id => current_user.id).empty?)
-		    		Status.create current_user, task
-		    		current_user.calendars << thatCal
-		    	end
-	    	}
-  	  end
-  	}
+		if !params['selection'].nil?
+			params['selection'].each{ |cid|
+				calendar_result = @client.execute( 
+						:api_method => @service.calendar_list.get,
+						:parameters => {
+							'calendarId' => cid[1]
+						}
+		    )
+		    
+		    if(Calendar.where("uid" => calendar_result.data["id"]).empty?)
+		    	@thisCalendar = Calendar.create calendar_result.data
+		    	current_user.calendars << @thisCalendar
+		    	tasks calendar_result.data["id"]
+		    else
+		    	thatCal = Calendar.where("uid" => calendar_result.data["id"]).first
+		    	thatTasks = Task.where(:calendar_id => thatCal.id)
+		    	thatTasks.each{ |task|
+		    		if(Status.where(:task_id => task[:id], :user_id => current_user.id).empty?)
+			    		Status.create current_user, task
+			    		current_user.calendars << thatCal
+			    	end
+		    	}
+	  	  end
+	  	}
+	  end
     redirect_to tasks_path
 	end
 
 	def unsync selected
 		exist = current_user.calendars
 		exist.each{ |cal|
-			if !(selected.any?{ |selectedmap| selectedmap[1] == cal.uid})
+			if selected.nil?
+				cal.users.clear
+				Status.where(:user_id => current_user).destroy_all
+			elsif !(selected.any?{ |selectedmap| selectedmap[1] == cal.uid})
 				cal.users.clear
 				cal.tasks.each{ |mytask| 
 					Status.where(:user_id => current_user, :task_id => mytask).first.destroy
