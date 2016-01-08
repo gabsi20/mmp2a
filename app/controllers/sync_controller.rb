@@ -53,7 +53,7 @@ class SyncController < ApplicationController
         Status.where(:user_id => current_user).destroy_all
       # if calendar is selected don't delete it
       elsif !(selected.any?{ |selectedmap| selectedmap[1] == cal.uid})
-        current_user.calendars.find(cal).clear
+        cal.users.delete(current_user)
         cal.tasks.each{ |mytask| 
           if !Status.where(:user_id => current_user, :task_id => mytask).first.nil?
             Status.where(:user_id => current_user, :task_id => mytask).first.destroy
