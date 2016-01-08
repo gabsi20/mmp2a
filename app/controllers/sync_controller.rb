@@ -36,9 +36,9 @@ class SyncController < ApplicationController
           thatTasks.each{ |task|
             if(Status.where(:task_id => task[:id], :user_id => current_user.id).empty?)
               Status.create current_user, task
-              current_user.calendars << thatCal
             end
           }
+          current_user.calendars << thatCal
         end
       }
     end
@@ -49,10 +49,11 @@ class SyncController < ApplicationController
     exist = current_user.calendars
     exist.each{ |cal|
       if selected.nil?
-        cal.users.clear
+        current_user.calendars.clear
         Status.where(:user_id => current_user).destroy_all
+      # if calendar is selected don't delete it
       elsif !(selected.any?{ |selectedmap| selectedmap[1] == cal.uid})
-        cal.users.clear
+        current_user.calendars.find(cal).clear
         cal.tasks.each{ |mytask| 
           if !Status.where(:user_id => current_user, :task_id => mytask).first.nil?
             Status.where(:user_id => current_user, :task_id => mytask).first.destroy
