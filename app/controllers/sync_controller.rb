@@ -109,13 +109,11 @@ class SyncController < ApplicationController
                   Status.create user, thisTask
                 }
               end
-            else
-              if e.start.dateTime > Time.now
-                thisTask = Task.create e, calendar
-                calendar.users.each{ |user|
-                  Status.create user, thisTask
-                }
-              end
+            elsif e.start.dateTime > Time.now
+              thisTask = Task.create e, calendar
+              calendar.users.each{ |user|
+                Status.create user, thisTask
+              }
             end
           end
         end
