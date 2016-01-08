@@ -15,7 +15,6 @@ class SyncController < ApplicationController
   end
 
   def calendars
-    puts "hey"
     unsync params['selection']
 
     if !params['selection'].nil?
