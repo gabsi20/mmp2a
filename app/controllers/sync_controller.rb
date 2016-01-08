@@ -55,7 +55,9 @@ class SyncController < ApplicationController
       elsif !(selected.any?{ |selectedmap| selectedmap[1] == cal.uid})
         cal.users.clear
         cal.tasks.each{ |mytask| 
-          Status.where(:user_id => current_user, :task_id => mytask).first.destroy
+          if !Status.where(:user_id => current_user, :task_id => mytask).first.nil?
+            Status.where(:user_id => current_user, :task_id => mytask).first.destroy
+          end
         }
       end
     }
@@ -96,6 +98,7 @@ class SyncController < ApplicationController
         }
       )
       events = calendar_result.data.items
+      puts events
       events.each{ |e|
         if Task.where(:uid => e.id).empty?
           if e.status != "cancelled"
