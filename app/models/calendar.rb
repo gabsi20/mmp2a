@@ -6,6 +6,6 @@ class Calendar < ActiveRecord::Base
     create! do |calendar|
       calendar.uid = cal["id"] || ""
       calendar.name = cal["summary"] || ""
-    end 
+    end
   end
 end

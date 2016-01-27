@@ -3,13 +3,13 @@ class SyncController < ApplicationController
   require 'google/api_client'
 
   def select
-    calendar_result = @client.execute( 
+    calendar_result = @client.execute(
         :api_method => @service.calendar_list.get,
         :parameters => {
           'calendarId' => ''
         }
     )
-    
+
     @exist = current_user.calendars
     @calendars = calendar_result.data.items
   end
@@ -19,13 +19,13 @@ class SyncController < ApplicationController
 
     if !params['selection'].nil?
       params['selection'].each{ |cid|
-        calendar_result = @client.execute( 
+        calendar_result = @client.execute(
             :api_method => @service.calendar_list.get,
             :parameters => {
               'calendarId' => cid[1]
             }
         )
-        
+
         if(Calendar.where("uid" => calendar_result.data["id"]).empty?)
           @thisCalendar = Calendar.create calendar_result.data
           current_user.calendars << @thisCalendar
@@ -54,7 +54,7 @@ class SyncController < ApplicationController
       # if calendar is selected don't delete it
       elsif !(selected.any?{ |selectedmap| selectedmap[1] == cal.uid})
         cal.users.delete(current_user)
-        cal.tasks.each{ |mytask| 
+        cal.tasks.each{ |mytask|
           if !Status.where(:user_id => current_user, :task_id => mytask).first.nil?
             Status.where(:user_id => current_user, :task_id => mytask).first.destroy
           end
@@ -64,7 +64,7 @@ class SyncController < ApplicationController
   end
 
   def tasks uid
-    task_result = @client.execute( 
+    task_result = @client.execute(
       :api_method => @service.events.list,
       :parameters => {
         'calendarId' => uid
@@ -91,7 +91,7 @@ class SyncController < ApplicationController
 
   def sync
     current_user.calendars.each{ |calendar|
-      calendar_result = @client.execute( 
+      calendar_result = @client.execute(
         :api_method => @service.events.list,
         :parameters => {
           'calendarId' => calendar.uid
@@ -127,7 +127,7 @@ class SyncController < ApplicationController
     @client = Google::APIClient.new(:application_name => "ToDoify")
     token = Token.where(:user => current_user, :provider => "google_oauth2").first
     @client.authorization.access_token = token.fresh_token
-    @service = @client.discovered_api('calendar', 'v3') 
+    @service = @client.discovered_api('calendar', 'v3')
   end
 
 end

@@ -24,6 +24,6 @@ class Task < ActiveRecord::Base
       }
       task.participants = participants.join(", ") || ""
       task.calendar_id = calendar.id
-    end 
+    end
   end
 end

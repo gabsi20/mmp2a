@@ -50,7 +50,7 @@ class Token < ActiveRecord::Base
 
   def fresh_token
     if expired?
-      refresh! 
+      refresh!
     else
       self.token
     end

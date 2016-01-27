@@ -6,7 +6,7 @@ class PagesController < ApplicationController
       render template: "pages/index.html"
     end
   end
-  def show 
+  def show
     render template: "pages/#{params[:page]}"
   end
 end
