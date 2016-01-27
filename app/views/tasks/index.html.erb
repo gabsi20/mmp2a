@@ -3,38 +3,16 @@
   <div class="row">
     <div class="col-xs-12 col-sm-6">
     <% @opentasks.each do |task| %>
-      <%= render :partial => "task", :locals => { :title => task.title, 
-                                                  :id => task.id,
-                                                  :due => task.due,
-                                                  :cellclass => 'singletask',
-                                                  :titleclass => 'tasktitle',
-                                                  :showcheck => true,
-                                                  :showarchive => true,
-                                                  :showinformation => true,
-                                                  :showgetback => false} %>
+      <%= render :partial => "task", :locals => { :task => task} %>
     <% end %>
     <% @closedtasks.each do |task| %>
-      <%= render :partial => "task", :locals => { :title => task.title, 
-                                                  :id => task.id,
-                                                  :due => task.due,
-                                                  :cellclass => 'singletask_done',
-                                                  :titleclass => 'tasktitle_done',
-                                                  :showcheck => false,
-                                                  :showarchive => true,
-                                                  :showinformation => false,
-                                                  :showgetback => true} %>
+      <%= render :partial => "task", :locals => { :task => task } %>
     <% end %>
 </div>
 <div class="col-xs-12 col-sm-6">
 <% @opentasks.each do |task| %>
   <%= render :partial => "taskdetail", :locals => { :calendar => @calendars.find(task.calendar_id).name, 
-                                                    :title => task.title, 
-                                                    :id => task.id,
-                                                    :due => task.due,
-                                                    :titleclass => 'tasktitle',
-                                                    :author => task.autor,
-                                                    :description => task.description,
-                                                    :participants => task.participants} %>
+                                                    :task => task} %>
     <% end %>
     </div>
 </div>

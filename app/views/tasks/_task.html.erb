@@ -1,23 +1,48 @@
-<div class="col-xs-12 col-sm-12 <%= cellclass %>" id="<%= id %>">
+<%
+  if task.statuses[0].status == "open"
+    cellclass = "singletask"
+    titleclass = "tasktitle"
+    showcheck = true
+    showarchive = true
+    showinformation = true
+    showgetback = false
+  elsif task.statuses[0].status == "closed"
+    cellclass = 'singletask_done'
+    titleclass = 'tasktitle_done'
+    showcheck = false
+    showarchive = true
+    showinformation = false
+    showgetback = true
+  else
+    cellclass = 'singletask'
+    titleclass = 'tasktitle_archived'
+    showcheck = false
+    showarchive = false
+    showinformation = true
+    showgetback = true
+  end
+%>
+
+<div class="col-xs-12 col-sm-12 <%= cellclass %>" id="<%= task.id %>">
   <div class="row">
     <div class="col-xs-12 col-sm-6">
-      <p class="<%= titleclass %>"><%= title %></p>
+      <p class="<%= titleclass %>"><%= task.title %></p>
       <p class="taskdate">
-        <%= due.strftime("on: %d.%m.%Y")%> <% if(due.hour != 0 && due.min != 0) %><%= due.strftime("at: %H:%M") %><% end %>
+        <%= task.due.strftime("on: %d.%m.%Y")%> <% if(task.due.hour != 0 && task.due.min != 0) %><%= task.due.strftime("at: %H:%M") %><% end %>
       </p>
     </div>
     <div class="col-xs-12 col-sm-6 iconbox">
       <% if showcheck %>
-        <%= link_to image_tag("icons/check.png", :class => "icons"), task_done_path(:tid => id) %>
+        <%= link_to image_tag("icons/check.png", :class => "icons"), task_done_path(:tid => task.id) %>
       <% end %>
       <% if showarchive %>
-        <%= link_to image_tag("icons/delete.png", :class => "icons"), task_archive_path(:tid => id) %>
+        <%= link_to image_tag("icons/delete.png", :class => "icons"), task_archive_path(:tid => task.id) %>
       <% end %>
       <% if showinformation %>
         <%= image_tag "icons/info.png", :class => "icons info" %>
       <% end %>
       <% if showgetback %>
-        <%= link_to image_tag("icons/back.png", :class => "icons"), task_done_path(:tid => id) %>
+        <%= link_to image_tag("icons/back.png", :class => "icons"), task_done_path(:tid => task.id) %>
       <% end %>
     </div>  
   </div>

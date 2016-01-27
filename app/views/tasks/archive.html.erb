@@ -3,27 +3,13 @@
   <div class="row">
     <div class="col-xs-12 col-sm-6">
       <% @archivedtasks.each do |task| %>
-        <%= render :partial => "task", :locals => { :title => task.title, 
-                                                    :id => task.id,
-                                                    :due => task.due,
-                                                    :cellclass => 'singletask',
-                                                    :titleclass => 'tasktitle_archived',
-                                                    :showcheck => false,
-                                                    :showarchive => false,
-                                                    :showinformation => true,
-                                                    :showgetback => true} %>
+        <%= render :partial => "task", :locals => { :task => task} %>
       <% end %>
     </div>
     <div class="col-xs-12 col-sm-6">
       <% @archivedtasks.each do |task| %>
         <%= render :partial => "taskdetail", :locals => { :calendar => @calendars.find(task.calendar_id).name, 
-                                                          :title => task.title, 
-                                                          :id => task.id,
-                                                          :due => task.due,
-                                                          :titleclass => 'tasktitle_archived',
-                                                          :author => task.autor,
-                                                          :description => task.description,
-                                                          :participants => task.participants} %>
+                                                          :task => task} %>
       <% end %>
     </div>
   </div>
