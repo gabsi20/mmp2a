@@ -5,8 +5,8 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @opentasks = current_user.tasks.where(:id => current_user.statuses.where(:status => "open").map(&:task_id)).order(:due)
-    @closedtasks = current_user.tasks.where(:id => current_user.statuses.where(:status => "closed").map(&:task_id)).order(:due)
+    @opentasks = current_user.tasks.where(:id => current_user.statuses.where(:status => "open").map(&:task_id)).includes(:statuses).order(:due)
+    @closedtasks = current_user.tasks.where(:id => current_user.statuses.where(:status => "closed").map(&:task_id)).includes(:statuses).order(:due)
     @calendars = Calendar.all
   end
 
@@ -15,6 +15,11 @@ class TasksController < ApplicationController
 
       redirect_to root_path, :notice => "You need to login before handling tasks."
     end
+  end
+
+  def opentasks_as_json
+    @opentasks = current_user.tasks.where(:id => current_user.statuses.where(:status => "open").map(&:task_id)).order(:due)
+    render :json => @opentasks
   end
 
   def archive

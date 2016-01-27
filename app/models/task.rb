@@ -1,5 +1,5 @@
 class Task < ActiveRecord::Base
-  belongs_to :calendars
+  belongs_to :calendars, :class_name => Task, :foreign_key => "calendar_id"
   has_many :statuses
   has_many :users, through: :statuses
 
