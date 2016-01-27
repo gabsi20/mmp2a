@@ -8,7 +8,7 @@
     </div>
     <div class="col-xs-12 col-sm-6">
       <% @archivedtasks.each do |task| %>
-        <%= render :partial => "taskdetail", :locals => { :calendar => @calendars.find(task.calendar_id).name, 
+        <%= render :partial => "taskdetail", :locals => { :calendar => @calendars.find(task.calendar_id).name,
                                                           :task => task} %>
       <% end %>
     </div>
