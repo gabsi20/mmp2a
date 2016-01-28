@@ -29,16 +29,12 @@ class SyncController < ApplicationController
         calendar = Calendar.where("uid" => calendar_result.data["id"]).first
         if(calendar.nil?)
           calendar = Calendar.create calendar_result.data
-          current_user.calendars << calendar
+          User.link_to_calendar calendar, current_user
           tasks calendar_result.data["id"], calendar
         else
           User.link_to_calendar calendar, current_user
           tasks = Task.where(:calendar_id => calendar.id)
-          tasks.each{ |task|
-            if(Status.where(:task_id => task[:id], :user_id => current_user.id).empty?)
-              Status.create current_user, task
-            end
-          }
+          Status.create_status_for_user tasks, current_user
         end
       }
     end
