@@ -73,7 +73,7 @@ class SyncController < ApplicationController
         end
       }
       events.each{ |event|
-        if Task.where(:uid => event.id).empty?
+        if !(Task.include? :uid => event.id)
           if event.status != "cancelled"
             if event.start.date.present?
               if event.start.date > Time.now
