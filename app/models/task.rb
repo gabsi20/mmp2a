@@ -36,11 +36,9 @@ class Task < ActiveRecord::Base
           task = Task.create event, calendar
           Status.create user, task
         end
-      elsif
-        if event.start.dateTime > Time.now.getlocal
-          task = Task.create event, calendar
-          Status.create user, task
-        end
+      elsif event.start.dateTime > Time.now.getlocal
+        task = Task.create event, calendar
+        Status.create user, task
       end
     end
   end
