@@ -65,7 +65,6 @@ class SyncController < ApplicationController
         }
       )
       events = calendar_result.data.items
-      puts events
       event_ids = events.map{ |event| event.id }
       Task.all.each{ |task|
         if !(event_ids.any?{ |id| task.uid == id})
