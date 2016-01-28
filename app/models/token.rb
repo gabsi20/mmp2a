@@ -1,6 +1,8 @@
 require 'net/http'
 require 'json'
 
+# Token Objects contains access and refresh token for
+# Google API requests
 class Token < ActiveRecord::Base
   belongs_to :user
 

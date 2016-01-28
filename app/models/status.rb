@@ -1,3 +1,5 @@
+# Status Objects connects user with a task
+# and shows if it is "open", "done", or "archived"
 class Status < ActiveRecord::Base
   belongs_to :task
   belongs_to :user

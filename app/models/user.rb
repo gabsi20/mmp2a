@@ -1,3 +1,4 @@
+# User Object contains User information from Google
 class User < ActiveRecord::Base
   has_and_belongs_to_many :calendars
   has_many :statuses

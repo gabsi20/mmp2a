@@ -1,3 +1,5 @@
+# Task Objects contains information from
+# Google Calendar Events
 class Task < ActiveRecord::Base
   belongs_to :calendars, :class_name => Task, :foreign_key => "calendar_id"
   has_many :statuses
