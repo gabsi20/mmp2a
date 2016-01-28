@@ -28,4 +28,20 @@ class Task < ActiveRecord::Base
       task.calendar_id = calendar.id
     end
   end
+
+  def self.save_event_in_database event, calendar, user
+    if event.status != "cancelled"
+        if event.start.date.present?
+          if event.start.date > Time.now
+            task = Task.create event, calendar
+            Status.create user, task
+          end
+        elsif
+          if event.start.dateTime > Time.now
+            task = Task.create event, calendar
+            Status.create user, task
+          end
+        end
+      end
+  end
 end

@@ -11,12 +11,12 @@ class SyncController < ApplicationController
         }
     )
 
-    exist = current_user.calendars
-    calendars = calendar_result.data.items
+    @exist = current_user.calendars
+    @calendars = calendar_result.data.items
   end
 
   def calendars
-    unsync params['selection']
+    Calendar.unsync params['selection'], current_user
 
     if !params['selection'].nil?
       params['selection'].each{ |cid|
@@ -30,7 +30,7 @@ class SyncController < ApplicationController
         if(Calendar.where("uid" => calendar_result.data["id"]).empty?)
           thisCalendar = Calendar.create calendar_result.data
           current_user.calendars << thisCalendar
-          tasks calendar_result.data["id"]
+          tasks calendar_result.data["id"], thisCalendar
         else
           thatCal = Calendar.where("uid" => calendar_result.data["id"]).first
           thatTasks = Task.where(:calendar_id => thatCal.id)
@@ -46,25 +46,7 @@ class SyncController < ApplicationController
     redirect_to tasks_path
   end
 
-  def unsync selected
-    exist = current_user.calendars
-    exist.each{ |cal|
-      if selected.nil?
-        current_user.calendars.clear
-        Status.where(:user_id => current_user).destroy_all
-      # if calendar is selected don't delete it
-      elsif !(selected.any?{ |selectedmap| selectedmap[1] == cal.uid})
-        cal.users.delete(current_user)
-        cal.tasks.each{ |mytask|
-          if !Status.where(:user_id => current_user, :task_id => mytask).first.nil?
-            Status.where(:user_id => current_user, :task_id => mytask).first.destroy
-          end
-        }
-      end
-    }
-  end
-
-  def tasks uid
+  def tasks uid, calendar
     task_result = @client.execute(
       :api_method => @service.events.list,
       :parameters => {
@@ -73,20 +55,8 @@ class SyncController < ApplicationController
     )
 
    events = task_result.data.items
-    events.each do |e|
-      if e.status != "cancelled"
-        if e.start.date.present?
-          if e.start.date > Time.now
-            thisTask = Task.create e, thisCalendar
-            Status.create current_user, thisTask
-          end
-        elsif
-          if e.start.dateTime > Time.now
-            thisTask = Task.create e, thisCalendar
-            Status.create current_user, thisTask
-          end
-        end
-      end
+    events.each do |event|
+      Task.save_event_in_database event, calendar, current_user
     end
   end
 
