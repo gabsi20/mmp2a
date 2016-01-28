@@ -1,5 +1,5 @@
 # Status Objects connects user with a task
-# and shows if it is "open", "done", or "archived"
+# and shows if it is 'open', 'done', or 'archived'
 class Status < ActiveRecord::Base
   belongs_to :task
   belongs_to :user
@@ -8,7 +8,7 @@ class Status < ActiveRecord::Base
     create! do |status|
     status.user_id = user.id
     status.task_id = task[:id]
-    status.status = "open"
+    status.status = 'open'
     end
   end
 

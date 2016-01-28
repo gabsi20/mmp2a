@@ -21,10 +21,10 @@ class User < ActiveRecord::Base
     create! do |user|
       user.password = Devise.friendly_token[0,20]
       if auth['info']
-        user.firstname = auth['info']['first_name'] || ""
-        user.lastname = auth['info']['last_name'] || ""
-        user.email = auth['info']['email'] || ""
-        user.image = auth['info']['image'] || ""
+        user.firstname = auth['info']['first_name'] || ''
+        user.lastname = auth['info']['last_name'] || ''
+        user.email = auth['info']['email'] || ''
+        user.image = auth['info']['image'] || ''
       end
     end
   end

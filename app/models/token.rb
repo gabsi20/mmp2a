@@ -12,11 +12,11 @@ class Token < ActiveRecord::Base
 
   def self.create_with_omniauth auth, user
     create! do |token|
-      token.provider = auth['provider'] || ""
-      token.token = auth['credentials']['token'] || ""
-      token.refresh_token = auth['credentials']['refresh_token'] || ""
-      token.expires_at = Time.at(auth['credentials']['expires_at']) || ""
-      token.uid = auth['uid'] || ""
+      token.provider = auth['provider'] || ''
+      token.token = auth['credentials']['token'] || ''
+      token.refresh_token = auth['credentials']['refresh_token'] || ''
+      token.expires_at = Time.at(auth['credentials']['expires_at']) || ''
+      token.uid = auth['uid'] || ''
       token.user = user
     end
   end
@@ -32,7 +32,7 @@ class Token < ActiveRecord::Base
   end
 
   def request_token_from_google
-    url = URI("https://accounts.google.com/o/oauth2/token")
+    url = URI('https://accounts.google.com/o/oauth2/token')
     Net::HTTP.post_form(url, self.to_params)
   end
 
@@ -41,13 +41,13 @@ class Token < ActiveRecord::Base
     data = JSON.parse(response.body)
     update_attributes(
       token: data['access_token'],
-      expires_at: (Time.now + data['expires_in'])
+      expires_at: (Time.now.getlocal + data['expires_in'])
     )
     data['access_token']
   end
 
   def expired?
-    expires_at < Time.now
+    expires_at < Time.now.getlocal
   end
 
   def fresh_token

@@ -26,11 +26,11 @@ class SyncController < ApplicationController
               'calendarId' => cid[1]
             }
         )
-        calendar = Calendar.where("uid" => calendar_result.data["id"]).first
+        calendar = Calendar.where('uid' => calendar_result.data['id']).first
         if(calendar.nil?)
           calendar = Calendar.create calendar_result.data
           User.link_to_calendar calendar, current_user
-          tasks calendar_result.data["id"], calendar
+          tasks calendar_result.data['id'], calendar
         else
           User.link_to_calendar calendar, current_user
           tasks = Task.where(:calendar_id => calendar.id)
@@ -73,15 +73,15 @@ class SyncController < ApplicationController
       }
       events.each{ |event|
         if !(Task.exists? :uid => event.id)
-          if event.status != "cancelled"
+          if event.status != 'cancelled'
             if event.start.date.present?
-              if event.start.date > Time.now
+              if event.start.date > Time.now.getlocal
                 task = Task.create event, calendar
                 calendar.users.each{ |user|
                   Status.create user, task
                 }
               end
-            elsif event.start.dateTime > Time.now
+            elsif event.start.dateTime > Time.now.getlocal
               task = Task.create event, calendar
               calendar.users.each{ |user|
                 Status.create user, task
@@ -96,8 +96,8 @@ class SyncController < ApplicationController
   end
 
   def setup
-    @client = Google::APIClient.new(:application_name => "ToDoify")
-    token = Token.where(:user => current_user, :provider => "google_oauth2").first
+    @client = Google::APIClient.new(:application_name => 'ToDoify')
+    token = Token.where(:user => current_user, :provider => 'google_oauth2').first
     @client.authorization.access_token = token.fresh_token
     @service = @client.discovered_api('calendar', 'v3')
   end
