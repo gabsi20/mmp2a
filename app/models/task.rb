@@ -29,16 +29,20 @@ class Task < ActiveRecord::Base
     end
   end
 
-  def self.save_event_in_database event, calendar, user
+  def self.save_event_in_database event, calendar
     if event.status != 'cancelled'
       if event.start.date.present?
         if event.start.date > Time.now.getlocal
           task = Task.create event, calendar
-          Status.create user, task
+          calendar.users.each{ |user|
+            Status.create user, task
+          }
         end
       elsif event.start.dateTime > Time.now.getlocal
         task = Task.create event, calendar
-        Status.create user, task
+        calendar.users.each{ |user|
+          Status.create user, task
+        }
       end
     end
   end

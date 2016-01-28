@@ -30,7 +30,7 @@ class SyncController < ApplicationController
         if(calendar.nil?)
           calendar = Calendar.create calendar_result.data
           User.link_to_calendar calendar, current_user
-          tasks calendar_result.data['id'], calendar
+          create_tasks calendar_result.data['id'], calendar
         else
           User.link_to_calendar calendar, current_user
           tasks = Task.where(:calendar_id => calendar.id)
@@ -42,7 +42,7 @@ class SyncController < ApplicationController
     redirect_to tasks_path
   end
 
-  def tasks uid, calendar
+  def create_tasks uid, calendar
     task_result = @client.execute(
       :api_method => @service.events.list,
       :parameters => {
@@ -52,7 +52,7 @@ class SyncController < ApplicationController
 
    events = task_result.data.items
     events.each do |event|
-      Task.save_event_in_database event, calendar, current_user
+      Task.save_event_in_database event, calendar
     end
   end
 
@@ -73,21 +73,7 @@ class SyncController < ApplicationController
       }
       events.each{ |event|
         unless Task.exists? :uid => event.id
-          if event.status != 'cancelled'
-            if event.start.date.present?
-              if event.start.date > Time.now.getlocal
-                task = Task.create event, calendar
-                calendar.users.each{ |user|
-                  Status.create user, task
-                }
-              end
-            elsif event.start.dateTime > Time.now.getlocal
-              task = Task.create event, calendar
-              calendar.users.each{ |user|
-                Status.create user, task
-              }
-            end
-          end
+          Task.save_event_in_database event, calendar
         end
       }
     }
