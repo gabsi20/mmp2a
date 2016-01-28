@@ -19,4 +19,12 @@ class Status < ActiveRecord::Base
       end
     }
   end
+
+  def self.delete_all_statuses calendar, user
+    calendar.tasks.each{ |task|
+      if Status.exists? :user_id => user, :task_id => task
+        Status.where(:user_id => user, :task_id => task).first.destroy
+      end
+    }
+  end
 end

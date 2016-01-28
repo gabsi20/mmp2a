@@ -10,21 +10,22 @@ class Calendar < ActiveRecord::Base
     end
   end
 
-  def self.unsync selected, current_user
-    exist = current_user.calendars
-    exist.each{ |cal|
+  def self.unsync selected, user
+    exist = user.calendars
+    exist.each{ |calendar|
       if selected.nil?
-        current_user.calendars.clear
+        user.calendars.clear
         Status.where(:user_id => current_user).destroy_all
-      # if calendar is selected don't delete it
-      elsif !(selected.any?{ |selectedmap| selectedmap[1] == cal.uid})
-        cal.users.delete(current_user)
-        cal.tasks.each{ |mytask|
-          unless Status.where(:user_id => current_user, :task_id => mytask).first.nil?
-            Status.where(:user_id => current_user, :task_id => mytask).first.destroy
-          end
-        }
+      elsif self.calendar_is_deselected selected, calendar
+        calendar.users.delete(user)
+        Status.delete_all_statuses calendar, user
       end
     }
+  end
+
+  def self.calendar_is_deselected selected, calendar
+    !selected.any? do |selectedmap|
+      selectedmap[1] == calendar.uid
+    end
   end
 end
