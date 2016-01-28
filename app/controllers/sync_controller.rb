@@ -1,3 +1,4 @@
+# Handles Google database synchronization
 class SyncController < ApplicationController
   before_action :setup
   require 'google/api_client'

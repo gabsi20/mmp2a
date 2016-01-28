@@ -1,3 +1,4 @@
+# Handles Static sites
 class PagesController < ApplicationController
   def index
     if current_user
