@@ -65,7 +65,9 @@ class SyncController < ApplicationController
         }
       )
       events = calendar_result.data.items
-      event_ids = events.map{ |event| event.id }
+      event_ids = events.map do |event|
+        event.id
+      end
       Task.all.each{ |task|
         unless event_ids.any?{ |id| task.uid == id}
           Task.delete_task_and_statuses task

@@ -21,9 +21,9 @@ class Task < ActiveRecord::Base
         task.due = taskinfo.start.dateTime || ''
       end
       participants = Array.new
-      taskinfo.attendees.each{ |attendee|
+      taskinfo.attendees.each do |attendee|
         participants.push attendee['displayName']
-      }
+      end
       task.participants = participants.join(', ') || ''
       task.calendar_id = calendar.id
     end
@@ -34,23 +34,23 @@ class Task < ActiveRecord::Base
       if event.start.date.present?
         if event.start.date > Time.now.getlocal
           task = Task.create event, calendar
-          calendar.users.each{ |user|
+          calendar.users.each do |user|
             Status.create user, task
-          }
+          end
         end
       elsif event.start.dateTime > Time.now.getlocal
         task = Task.create event, calendar
-        calendar.users.each{ |user|
+        calendar.users.each do |user|
           Status.create user, task
-        }
+        end
       end
     end
   end
 
   def self.delete_task_and_statuses task
-    task.statuses.each{ |status|
+    task.statuses.each do |status|
       status.destroy
-    }
+    end
     task.destroy
   end
 end

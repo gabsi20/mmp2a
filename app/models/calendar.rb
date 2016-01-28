@@ -12,7 +12,7 @@ class Calendar < ActiveRecord::Base
 
   def self.unsync selected, user
     exist = user.calendars
-    exist.each{ |calendar|
+    exist.each do |calendar|
       if selected.nil?
         user.calendars.clear
         Status.where(:user_id => user).destroy_all
@@ -20,7 +20,7 @@ class Calendar < ActiveRecord::Base
         calendar.users.delete(user)
         Status.delete_all_statuses calendar, user
       end
-    }
+    end
   end
 
   def self.calendar_is_deselected selected, calendar
