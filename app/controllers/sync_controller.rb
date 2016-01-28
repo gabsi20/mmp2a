@@ -11,8 +11,8 @@ class SyncController < ApplicationController
         }
     )
 
-    @exist = current_user.calendars
-    @calendars = calendar_result.data.items
+    exist = current_user.calendars
+    calendars = calendar_result.data.items
   end
 
   def calendars
@@ -28,8 +28,8 @@ class SyncController < ApplicationController
         )
 
         if(Calendar.where("uid" => calendar_result.data["id"]).empty?)
-          @thisCalendar = Calendar.create calendar_result.data
-          current_user.calendars << @thisCalendar
+          thisCalendar = Calendar.create calendar_result.data
+          current_user.calendars << thisCalendar
           tasks calendar_result.data["id"]
         else
           thatCal = Calendar.where("uid" => calendar_result.data["id"]).first
@@ -77,12 +77,12 @@ class SyncController < ApplicationController
       if e.status != "cancelled"
         if e.start.date.present?
           if e.start.date > Time.now
-            thisTask = Task.create e, @thisCalendar
+            thisTask = Task.create e, thisCalendar
             Status.create current_user, thisTask
           end
         elsif
           if e.start.dateTime > Time.now
-            thisTask = Task.create e, @thisCalendar
+            thisTask = Task.create e, thisCalendar
             Status.create current_user, thisTask
           end
         end
@@ -101,7 +101,7 @@ class SyncController < ApplicationController
       events = calendar_result.data.items
       puts events
       event_ids = events.map{ |event| event.id }
-      Task.all.each{ |t| 
+      Task.all.each{ |t|
         if !(event_ids.any?{ |id| t.uid == id})
           delete_task t
         end
@@ -143,5 +143,4 @@ class SyncController < ApplicationController
     @client.authorization.access_token = token.fresh_token
     @service = @client.discovered_api('calendar', 'v3')
   end
-
 end
