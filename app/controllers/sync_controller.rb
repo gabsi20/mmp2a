@@ -33,10 +33,16 @@ class SyncController < ApplicationController
           tasks calendar_result.data["id"], calendar
         else
           User.link_to_calendar calendar, current_user
+          tasks = Task.where(:calendar_id => calendar.id)
+          tasks.each{ |task|
+            if(Status.where(:task_id => task[:id], :user_id => current_user.id).empty?)
+              Status.create current_user, task
+            end
+          }
         end
       }
     end
-    
+
     redirect_to tasks_path
   end
 

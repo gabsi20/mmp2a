@@ -33,11 +33,5 @@ class User < ActiveRecord::Base
     if(!(user.calendars.include? calendar))
       user.calendars << calendar
     end
-    tasks = Task.where(:calendar_id => calendar.id)
-    tasks.each{ |task|
-      if(Status.where(:task_id => task[:id], :user_id => user.id).empty?)
-        Status.create user, task
-      end
-    }
   end
 end
