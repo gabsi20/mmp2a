@@ -16,7 +16,7 @@ class Calendar < ActiveRecord::Base
       if selected.nil?
         user.calendars.clear
         Status.where(:user_id => user).destroy_all
-      elsif self.calendar_is_deselected selected, calendar
+      elsif calendar_is_deselected selected, calendar
         calendar.users.delete(user)
         Status.delete_all_statuses calendar, user
       end
