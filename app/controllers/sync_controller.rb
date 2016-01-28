@@ -18,7 +18,7 @@ class SyncController < ApplicationController
   def calendars
     Calendar.unsync params['selection'], current_user
 
-    if !params['selection'].nil?
+    unless params['selection'].nil?
       params['selection'].each{ |cid|
         calendar_result = @client.execute(
             :api_method => @service.calendar_list.get,
@@ -67,12 +67,12 @@ class SyncController < ApplicationController
       events = calendar_result.data.items
       event_ids = events.map{ |event| event.id }
       Task.all.each{ |task|
-        if !(event_ids.any?{ |id| task.uid == id})
+        unless event_ids.any?{ |id| task.uid == id}
           Task.delete_task_and_statuses task
         end
       }
       events.each{ |event|
-        if !(Task.exists? :uid => event.id)
+        unless Task.exists? :uid => event.id
           if event.status != 'cancelled'
             if event.start.date.present?
               if event.start.date > Time.now.getlocal

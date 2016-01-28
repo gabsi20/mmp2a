@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   end
 
   def self.link_to_calendar calendar, user
-    if(!(user.calendars.include? calendar))
+    unless user.calendars.include? calendar
       user.calendars << calendar
     end
   end

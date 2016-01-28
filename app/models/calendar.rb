@@ -20,7 +20,7 @@ class Calendar < ActiveRecord::Base
       elsif !(selected.any?{ |selectedmap| selectedmap[1] == cal.uid})
         cal.users.delete(current_user)
         cal.tasks.each{ |mytask|
-          if !Status.where(:user_id => current_user, :task_id => mytask).first.nil?
+          unless Status.where(:user_id => current_user, :task_id => mytask).first.nil?
             Status.where(:user_id => current_user, :task_id => mytask).first.destroy
           end
         }
