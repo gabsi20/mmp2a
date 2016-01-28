@@ -44,4 +44,11 @@ class Task < ActiveRecord::Base
         end
       end
   end
+
+  def self.delete_task_and_statuses task
+    task.statuses.each{ |status|
+      status.destroy
+    }
+    task.destroy
+  end
 end

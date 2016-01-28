@@ -26,17 +26,17 @@ class SyncController < ApplicationController
               'calendarId' => cid[1]
             }
         )
-
-        if(Calendar.where("uid" => calendar_result.data["id"]).empty?)
-          thisCalendar = Calendar.create calendar_result.data
-          current_user.calendars << thisCalendar
-          tasks calendar_result.data["id"], thisCalendar
+        calendar = Calendar.where("uid" => calendar_result.data["id"]).first
+        if(calendar.nil?)
+          calendar = Calendar.create calendar_result.data
+          current_user.calendars << calendar
+          tasks calendar_result.data["id"], calendar
         else
-          calendar = Calendar.where("uid" => calendar_result.data["id"]).first
           User.link_to_calendar calendar, current_user
         end
       }
     end
+    
     redirect_to tasks_path
   end
 
@@ -65,25 +65,25 @@ class SyncController < ApplicationController
       events = calendar_result.data.items
       puts events
       event_ids = events.map{ |event| event.id }
-      Task.all.each{ |t|
-        if !(event_ids.any?{ |id| t.uid == id})
-          delete_task t
+      Task.all.each{ |task|
+        if !(event_ids.any?{ |id| task.uid == id})
+          Task.delete_task_and_statuses task
         end
       }
-      events.each{ |e|
-        if Task.where(:uid => e.id).empty?
-          if e.status != "cancelled"
-            if e.start.date.present?
-              if e.start.date > Time.now
-                thisTask = Task.create e, calendar
+      events.each{ |event|
+        if Task.where(:uid => event.id).empty?
+          if event.status != "cancelled"
+            if event.start.date.present?
+              if event.start.date > Time.now
+                task = Task.create event, calendar
                 calendar.users.each{ |user|
-                  Status.create user, thisTask
+                  Status.create user, task
                 }
               end
-            elsif e.start.dateTime > Time.now
-              thisTask = Task.create e, calendar
+            elsif event.start.dateTime > Time.now
+              task = Task.create event, calendar
               calendar.users.each{ |user|
-                Status.create user, thisTask
+                Status.create user, task
               }
             end
           end
@@ -92,13 +92,6 @@ class SyncController < ApplicationController
     }
 
     redirect_to tasks_path
-  end
-
-  def delete_task t
-    t.statuses.each{ |status|
-      status.destroy
-    }
-    t.destroy
   end
 
   def setup
