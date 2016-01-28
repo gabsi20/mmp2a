@@ -100,6 +100,12 @@ class SyncController < ApplicationController
       )
       events = calendar_result.data.items
       puts events
+      event_ids = events.map{ |event| event.id }
+      Task.all.each{ |t| 
+        if !(event_ids.any?{ |id| t.uid == id})
+          delete_task t
+        end
+      }
       events.each{ |e|
         if Task.where(:uid => e.id).empty?
           if e.status != "cancelled"
@@ -122,6 +128,13 @@ class SyncController < ApplicationController
     }
 
     redirect_to tasks_path
+  end
+
+  def delete_task t
+    t.statuses.each{ |status|
+      status.destroy
+    }
+    t.destroy
   end
 
   def setup
