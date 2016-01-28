@@ -32,14 +32,8 @@ class SyncController < ApplicationController
           current_user.calendars << thisCalendar
           tasks calendar_result.data["id"], thisCalendar
         else
-          thatCal = Calendar.where("uid" => calendar_result.data["id"]).first
-          thatTasks = Task.where(:calendar_id => thatCal.id)
-          thatTasks.each{ |task|
-            if(Status.where(:task_id => task[:id], :user_id => current_user.id).empty?)
-              Status.create current_user, task
-            end
-          }
-          current_user.calendars << thatCal
+          calendar = Calendar.where("uid" => calendar_result.data["id"]).first
+          User.link_to_calendar calendar, current_user
         end
       }
     end
