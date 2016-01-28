@@ -20,7 +20,7 @@ class Task < ActiveRecord::Base
       else
         task.due = taskinfo.start.dateTime || ''
       end
-      participants = Array.new
+      participants = []
       taskinfo.attendees.each do |attendee|
         participants.push attendee['displayName']
       end
