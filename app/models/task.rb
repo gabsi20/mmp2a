@@ -11,7 +11,7 @@ class Task < ActiveRecord::Base
       task.title = taskinfo.summary || ''
       task.description = taskinfo.description || ''
       if taskinfo.creator.present?
-        if taskinfo.creator.has_key? displayName
+        if taskinfo.creator.displayName.present?
           task.autor = taskinfo.creator.displayName || ''
         end
       end
