@@ -2,13 +2,15 @@
   <div class="row">
     <div class="col-xs-12 col-sm-6">
       <% @donetasks.each do |task| %>
-        <%= render :partial => "task", :locals => { :task => task} %>
+        <%= render :partial => "task", :locals => { :task => task,
+                                                  :status => 'closed'} %>
       <% end %>
     </div>
     <div class="col-xs-12 col-sm-6">
       <% @donetasks.each do |task| %>
         <%= render :partial => "taskdetail", :locals => { :calendar => @calendars.find(task.calendar_id).name,
-                                                          :task => task} %>
+                                                          :task => task,
+                                                  :status => 'closed'} %>
       <% end %>
     </div>
   </div>

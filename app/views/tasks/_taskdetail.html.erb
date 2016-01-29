@@ -1,12 +1,12 @@
 <%
-if task.statuses[0].status == "open"
+if status == "open"
     cellclass = "singletask"
     titleclass = "tasktitle"
     showcheck = true
     showarchive = true
     showinformation = true
     showgetback = false
-  elsif task.statuses[0].status == "closed"
+  elsif status == "closed"
     cellclass = 'singletask_done'
     titleclass = 'tasktitle_done'
     showcheck = false
