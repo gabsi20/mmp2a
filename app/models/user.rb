@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   def self.from_omniauth auth
     token = Token.where(:provider => auth['provider'],
                         :uid => auth['uid']).first
-    unless token.empty?
+    unless token.nil?
       token.user
     else
       self.create_with_omniauth(auth)
