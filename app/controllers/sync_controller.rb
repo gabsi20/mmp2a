@@ -19,11 +19,11 @@ class SyncController < ApplicationController
     Calendar.unsync params['selection'], current_user
 
     unless params['selection'].nil?
-      params['selection'].each do |cid|
+      params['selection'].each do |calendar_id|
         calendar_result = @client.execute(
             :api_method => @service.calendar_list.get,
             :parameters => {
-              'calendarId' => cid[1]
+              'calendarId' => calendar_id[1]
             }
         )
         calendar = Calendar.where('uid' => calendar_result.data['id']).first
@@ -43,8 +43,7 @@ class SyncController < ApplicationController
   end
 
   def create_tasks uid, calendar
-    task_result = get_events_from_google uid
-    events = task_result.data.items
+    events = get_events_from_google uid
 
     events.each do |event|
       Task.save_event_in_database event, calendar
@@ -53,22 +52,11 @@ class SyncController < ApplicationController
 
   def sync
     current_user.calendars.each do |calendar|
-      calendar_result = get_events_from_google calendar.uid
-      events = calendar_result.data.items
-      event_ids = get_event_ids events
+      events = get_events_from_google calendar.uid
       tasks = Task.where(:calendar_id => calendar)
 
-      Task.all.each do |task|
-        if task_was_removed_from_google event_ids, task
-          Task.delete_task_and_statuses task
-        end
-      end
-
-      events.each do |event|
-        if event_is_not_in_database tasks, event.id
-          Task.save_event_in_database event, calendar
-        end
-      end
+      Task.remove_deleted_events events
+      Task.save_events_in_database events, tasks, calendar
     end
 
     redirect_to tasks_path
@@ -81,28 +69,13 @@ class SyncController < ApplicationController
     @service = @client.discovered_api('calendar', 'v3')
   end
 
-  def task_was_removed_from_google event_ids, task
-    !event_ids.any?{ |id| task.uid == id}
-  end
-
   def get_events_from_google calendar_id
-    @client.execute(
+    calendar_result = @client.execute(
       :api_method => @service.events.list,
       :parameters => {
         'calendarId' => calendar_id
       }
     )
-  end
-
-  def event_is_not_in_database tasks, event_id
-    !tasks.any? do |task|
-      task.uid == event_id
-    end
-  end
-
-  def get_event_ids events
-    events.map do |event|
-      event.id
-    end
+    calendar_result.data.items
   end
 end

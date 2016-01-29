@@ -29,6 +29,23 @@ class Task < ActiveRecord::Base
     end
   end
 
+  def self.remove_deleted_events events
+    event_ids = get_event_ids events
+    Task.all.each do |task|
+      if task_was_removed_from_google event_ids, task
+        Task.delete_task_and_statuses task
+      end
+    end
+  end
+
+  def self.save_events_in_database events, tasks, calendar
+    events.each do |event|
+      if event_is_not_in_database tasks, event.id
+        save_event_in_database event, calendar
+      end
+    end
+  end
+
   def self.save_event_in_database event, calendar
     if event.status != 'cancelled'
       if event.start.date.present?
@@ -52,5 +69,21 @@ class Task < ActiveRecord::Base
       status.destroy
     end
     task.destroy
+  end
+
+  def self.event_is_not_in_database tasks, event_id
+    !tasks.any? do |task|
+      task.uid == event_id
+    end
+  end
+
+  def self.task_was_removed_from_google event_ids, task
+    !event_ids.any?{ |id| task.uid == id}
+  end
+
+  def self.get_event_ids events
+    events.map do |event|
+      event.id
+    end
   end
 end
