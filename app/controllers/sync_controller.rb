@@ -27,7 +27,7 @@ class SyncController < ApplicationController
             }
         )
         calendar = Calendar.where('uid' => calendar_result.data['id']).first
-        if(calendar.nil?)
+        if(calendar.blank?)
           calendar = Calendar.create calendar_result.data
           User.link_to_calendar calendar, current_user
           create_tasks calendar_result.data['id'], calendar
@@ -64,7 +64,8 @@ class SyncController < ApplicationController
 
   def setup
     @client = Google::APIClient.new(:application_name => 'ToDoify')
-    token = Token.where(:user => current_user, :provider => 'google_oauth2').first
+    token = Token.where(:user => current_user,
+                        :provider => 'google_oauth2').first
     @client.authorization.access_token = token.fresh_token
     @service = @client.discovered_api('calendar', 'v3')
   end

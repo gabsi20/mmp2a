@@ -10,8 +10,9 @@ class User < ActiveRecord::Base
          :omniauthable
 
   def self.from_omniauth auth
-    token = Token.where(:provider => auth['provider'], :uid => auth['uid']).first
-    unless token.nil?
+    token = Token.where(:provider => auth['provider'],
+                        :uid => auth['uid']).first
+    unless token.empty?
       token.user
     else
       self.create_with_omniauth(auth)

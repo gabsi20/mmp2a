@@ -6,30 +6,41 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @opentasks = current_user.tasks.where(:id => current_user.statuses.where(:status => 'open').map(&:task_id)).order(:due)
-    @closedtasks = current_user.tasks.where(:id => current_user.statuses.where(:status => 'closed').map(&:task_id)).order(:due)
+    @opentasks = current_user.tasks.where(
+      :id => current_user.statuses.where(:status => 'open').map(&:task_id)
+    ).order(:due)
+    @closedtasks = current_user.tasks.where(
+      :id => current_user.statuses.where(:status => 'closed').map(&:task_id)
+    ).order(:due)
     @calendars = Calendar.all
   end
 
   def authenticate
     if !current_user
 
-      redirect_to root_path, :notice => 'You need to login before handling tasks.'
+      redirect_to root_path,
+        :notice => 'You need to login before handling tasks.'
     end
   end
 
   def opentasks_as_json
-    @opentasks = current_user.tasks.where(:id => current_user.statuses.where(:status => 'open').map(&:task_id)).order(:due)
+    @opentasks = current_user.tasks.where(
+      :id => current_user.statuses.where(:status => 'open').map(&:task_id)
+    ).order(:due)
     render :json => @opentasks
   end
 
   def archive
-    @archivedtasks = current_user.tasks.where(:id => current_user.statuses.where(:status => 'archived').map(&:task_id)).order(:due)
+    @archivedtasks = current_user.tasks.where(
+      :id => current_user.statuses.where(:status => 'archived').map(&:task_id)
+    ).order(:due)
     @calendars = Calendar.all
   end
 
   def done
-    @donetasks = current_user.tasks.where(:id => current_user.statuses.where(:status => 'closed').map(&:task_id)).order(:due)
+    @donetasks = current_user.tasks.where(
+      :id => current_user.statuses.where(:status => 'closed').map(&:task_id)
+    ).order(:due)
     @calendars = Calendar.all
   end
 
@@ -70,7 +81,8 @@ class TasksController < ApplicationController
     @status.status = 'archived'
     respond_to do |format|
       if @status.save
-        format.html { redirect_to tasks_path, notice: 'Task archived successfully.'}
+        format.html { redirect_to tasks_path,
+                      notice: 'Task archived successfully.'}
       else
         format.html { redirect_to tasks_path, notice: 'Failure.'}
       end
@@ -84,11 +96,14 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to @task, notice: 'Task was successfully created.' }
-        format.json { render :show, status: :created, location: @task }
+        format.html { redirect_to @task,
+                      notice: 'Task was successfully created.' }
+        format.json { render :show,
+                      status: :created, location: @task }
       else
         format.html { render :new }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
+        format.json { render json: @task.errors,
+                      status: :unprocessable_entity }
       end
     end
   end
@@ -98,11 +113,15 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to @task, notice: 'Task was successfully updated.' }
-        format.json { render :show, status: :ok, location: @task }
+        format.html { redirect_to @task,
+                      notice: 'Task was successfully updated.' }
+        format.json { render :show,
+                      status: :ok,
+                      location: @task }
       else
         format.html { render :edit }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
+        format.json { render json: @task.errors,
+                      status: :unprocessable_entity }
       end
     end
   end
@@ -112,7 +131,8 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
     respond_to do |format|
-      format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
+      format.html { redirect_to tasks_url,
+                    notice: 'Task was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -124,7 +144,8 @@ class TasksController < ApplicationController
       @task = Task.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    # Never trust parameters from the scary internet,
+    # only allow the white list through.
     def task_params
       params.require(:task).permit(:description, :autor, :participants, :due)
     end

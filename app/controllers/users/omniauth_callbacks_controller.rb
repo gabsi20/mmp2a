@@ -5,15 +5,20 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     Token.from_omniauth request.env['omniauth.auth'], @user
 
     if @user.persisted?
-      sign_in @user, :event => :authentication #this will throw if @user is not activated
+      sign_in @user, :event => :authentication
       if !(current_user.calendars.any?)
         redirect_to '/sync/select'
       else
         redirect_to '/tasks'
       end
-      set_flash_message :notice, :success, :kind => 'Google' if is_navigational_format?
+      set_flash_message :notice,
+                        :success,
+                        :kind => 'Google' if is_navigational_format?
     else
-      set_flash_message :notice, :failure, :kind => 'Google', :reason => 'something went wrong' if is_navigational_format?
+      set_flash_message :notice,
+                        :failure,
+                        :kind => 'Google',
+                        :reason => 'error' if is_navigational_format?
       redirect_to root_path
     end
   end

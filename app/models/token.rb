@@ -7,7 +7,10 @@ class Token < ActiveRecord::Base
   belongs_to :user
 
   def self.from_omniauth auth, user
-    Token.where(:provider => auth['provider'], :uid => auth['uid']).first || self.create_with_omniauth(auth, user)
+    Token.where(
+      :provider => auth['provider'],
+      :uid => auth['uid']
+    ).first || self.create_with_omniauth(auth, user)
   end
 
   def self.create_with_omniauth auth, user
