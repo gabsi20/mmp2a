@@ -4,6 +4,7 @@ class Task < ActiveRecord::Base
   belongs_to :calendar
   has_many :statuses
   has_many :users, through: :statuses
+  delegate :name, :to => :calendar, :prefix => true
 
   def self.create taskinfo, calendar
     create! do |task|
@@ -79,6 +80,16 @@ class Task < ActiveRecord::Base
 
   def self.task_was_removed_from_google event_ids, task
     !event_ids.any?{ |id| task.uid == id}
+  end
+
+  def self.toggle_status status
+    if status.status != 'open'
+      status.status = 'open'
+      'Task reactivated successfully.'
+    else
+      status.status = 'closed'
+      'Task checked successfully.'
+    end
   end
 
   def self.get_event_ids events

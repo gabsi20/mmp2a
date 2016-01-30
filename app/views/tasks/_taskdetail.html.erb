@@ -39,11 +39,11 @@ if status == "open"
         </div>
         <div class="col-xs-12 col-sm-6">
           <p class="detail_section_header">Calendar:</p>
-          <p class="detail_member_name"><%= task.calendar.name %></p>
+          <p class="detail_member_name"><%= task.calendar_name %></p>
           <div class="fix"></div>
         </div>
       </div>
-      <% if task.participants != "" %>
+      <% if task.participants? %>
         <div class="row">
           <div class="col-xs-12">
             <p class="detail_section_header">Participants:</p>
@@ -60,7 +60,7 @@ if status == "open"
           <% end %>
         </div>
       <% end %>
-      <% if task.description != "" %>
+      <% if task.description? %>
         <div class="row">
           <div class="col-xs-12">
             <p class="detail_section_header">Description:</p>

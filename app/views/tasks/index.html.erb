@@ -10,15 +10,13 @@
       <%= render :partial => "task", :locals => { :task => task,
                                                   :status => 'closed'} %>
     <% end %>
-</div>
-<div class="col-xs-12 col-sm-6">
-<% @opentasks.each do |task| %>
-  <%= render :partial => "taskdetail", :locals => {
-                                                    :task => task,
-                                                  :status => 'open' } 
-                                          %>
-    <% end %>
     </div>
-</div>
+    <div class="col-xs-12 col-sm-6">
+      <% @opentasks.each do |task| %>
+        <%= render :partial => "taskdetail", :locals => { :task => task,
+                                                          :status => 'open'} %>
+      <% end %>
+    </div>
+  </div>
 </div>
 
