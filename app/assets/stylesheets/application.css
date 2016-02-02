@@ -159,6 +159,9 @@ a:hover{
   float: right;
   margin-bottom: 10px;
 }
+.singledetail p{
+  word-break: break-word;
+}
 .detail_section_header{
   font-style: italic;
   font-weight: 700;
