@@ -55,7 +55,7 @@ class SyncController < ApplicationController
       events = get_events_from_google calendar.uid
       tasks = Task.where(:calendar_id => calendar)
 
-      Task.remove_deleted_events events
+      #Task.remove_deleted_events events
       Task.save_events_in_database events, tasks, calendar
     end
 

@@ -12,8 +12,8 @@ class Task < ActiveRecord::Base
       task.title = taskinfo.summary || ''
       task.description = taskinfo.description || ''
       if taskinfo.creator.present?
-        if taskinfo.creator.displayName.present?
-          task.autor = taskinfo.creator.displayName || ''
+        if taskinfo.creator.email.present?
+          task.autor = taskinfo.creator.email || ''
         end
       end
       if taskinfo.start.date.present?
@@ -32,6 +32,7 @@ class Task < ActiveRecord::Base
 
   def self.remove_deleted_events events
     event_ids = get_event_ids events
+    puts event_ids
     Task.all.each do |task|
       if task_was_removed_from_google event_ids, task
         Task.delete_task_and_statuses task
