@@ -33,16 +33,37 @@
     </div>
     <div class="col-xs-12 col-sm-6 iconbox">
       <% if showcheck %>
-        <%= link_to image_tag("icons/check.png", :class => "icons"), task_done_path(:tid => task.id) %>
-      <% end %>
+        <%=
+          form_tag task_done_path, :style => "display: inline;" do
+            button_tag image_tag("icons/check.png", :class => "icons"),
+              :type => "submit",
+              :value => task.id,
+              :style => "border: none;background: none;padding:0;",
+              :name => "tid"
+      	  end %>
+      	<% end %>
       <% if showarchive %>
-        <%= link_to image_tag("icons/delete.png", :class => "icons"), task_archive_path(:tid => task.id) %>
+        <%=
+          form_tag task_archive_path, :style => "display: inline;" do
+            button_tag image_tag("icons/delete.png", :class => "icons"),
+              :type => "submit",
+              :value => task.id,
+              :style => "border: none;background: none;padding:0;",
+              :name => "tid"
+          end %>
       <% end %>
       <% if showinformation %>
         <%= image_tag "icons/info.png", :class => "icons info" %>
       <% end %>
       <% if showgetback %>
-        <%= link_to image_tag("icons/back.png", :class => "icons"), task_done_path(:tid => task.id) %>
+        <%= 
+          form_tag task_done_path, :style => "display: inline;" do
+  			button_tag image_tag("icons/back.png", :class => "icons"),
+  			  :type => "submit",
+  			  :value => task.id,
+  			  :style => "border: none;background: none;padding:0;",
+  			  :name => "tid"
+  		  end %>
       <% end %>
     </div>
   </div>
