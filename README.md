@@ -7,6 +7,20 @@
     rake db:migrate
     rails server
 
+__Set environment variables__
+
+_Database config:_
+- ENV["local_db"]
+- ENV["local_user"]
+- ENV["local_pwd"]
+
+_Google API config:_
+- ENV["GOOGLE_KEY"]
+- ENV["GOOGLE_SECRET"]
+
+_Rails secret token:_
+- ENV["SECRET_KEY_BASE"]
+
 
 
 ###Contributors###
