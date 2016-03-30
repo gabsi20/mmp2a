@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   get "/tasks" => 'tasks#index'
-  get "/open.json" => 'tasks#opentasks_as_json'
   get 'welcome/index'
   get 'sync/calendars' => 'sync#calendars'
   get 'sync/select' => 'sync#select'
@@ -16,6 +15,12 @@ Rails.application.routes.draw do
   get 'tasks/done' => 'tasks#done'
   #resources :calendars
   #resources :users
+
+  # APICALLS
+  get "api/open.json" => 'tasks#opentasks_as_json'
+  get "api/closed.json" => 'tasks#closedtasks_as_json'
+  get "api/archived.json" => 'tasks#archivedtasks_as_json'
+  post "test" => 'tasks#testmethod'
 
   get '/signin' => 'pages#index'
   get '/' => 'pages#index'

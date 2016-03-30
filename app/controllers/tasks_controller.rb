@@ -30,6 +30,20 @@ class TasksController < ApplicationController
     render :json => @opentasks
   end
 
+  def closedtasks_as_json
+    @closedtasks = current_user.tasks.where(
+      :id => current_user.statuses.where(:status => 'closed').map(&:task_id)
+    ).order(:due)
+    render :json => @closedtasks
+  end
+
+  def archivedtasks_as_json
+    @archivedtasks = current_user.tasks.where(
+      :id => current_user.statuses.where(:status => 'archived').map(&:task_id)
+    ).order(:due)
+    render :json => @archivedtasks
+  end
+
   def archive
     @archivedtasks = current_user.tasks.where(
       :id => current_user.statuses.where(:status => 'archived').map(&:task_id)
@@ -56,6 +70,10 @@ class TasksController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
+  end
+
+  def testmethod
+    puts params
   end
 
   def taskdone

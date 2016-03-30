@@ -30,14 +30,13 @@ class Task < ActiveRecord::Base
     end
   end
 
-  def self.remove_deleted_events events
-    event_ids = get_event_ids events
-    puts event_ids
-    Task.all.each do |task|
-      if task_was_removed_from_google event_ids, task
-        Task.delete_task_and_statuses task
-      end
-    end
+  def self.remove_deleted_events events 
+    event_ids = get_event_ids events 
+    Task.all.each do |task| 
+      if task_was_removed_from_google event_ids, task 
+        Task.delete_task_and_statuses task 
+      end 
+    end 
   end
 
   def self.save_events_in_database events, tasks, calendar
