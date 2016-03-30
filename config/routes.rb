@@ -17,10 +17,11 @@ Rails.application.routes.draw do
   #resources :users
 
   # APICALLS
-  get "api/open.json" => 'tasks#opentasks_as_json'
-  get "api/closed.json" => 'tasks#closedtasks_as_json'
-  get "api/archived.json" => 'tasks#archivedtasks_as_json'
+  get "api/:user/open.json" => 'tasks#opentasks_as_json'
+  get "api/:user/closed.json" => 'tasks#closedtasks_as_json'
+  get "api/:user/archived.json" => 'tasks#archivedtasks_as_json'
   post "test" => 'tasks#testmethod'
+  get "apitoken" => 'apitoken#index'
 
   get '/signin' => 'pages#index'
   get '/' => 'pages#index'

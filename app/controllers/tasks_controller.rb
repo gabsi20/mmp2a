@@ -1,7 +1,8 @@
 # Displays different task pages
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate
+  before_action :authenticate, except: [:opentasks_as_json, :closedtasks_as_json, :archivedtasks_as_json]
+
 
   # GET /tasks
   # GET /tasks.json
@@ -24,25 +25,41 @@ class TasksController < ApplicationController
   end
 
   def opentasks_as_json
-    @opentasks = current_user.tasks.where(
-      :id => current_user.statuses.where(:status => 'open').map(&:task_id)
-    ).order(:due)
-    render :json => @opentasks
+    if Apitoken.where(:token => params[:user]).first
+      thisuser = Apitoken.where(:token => params[:user]).first.user
+      @opentasks = thisuser.tasks.where(
+        :id => thisuser.statuses.where(:status => 'open').map(&:task_id)
+      ).order(:due)
+      render :json => @opentasks
+    else
+      render :json => {}
+    end
   end
 
   def closedtasks_as_json
-    @closedtasks = current_user.tasks.where(
-      :id => current_user.statuses.where(:status => 'closed').map(&:task_id)
-    ).order(:due)
-    render :json => @closedtasks
+    if Apitoken.where(:token => params[:user]).first
+      thisuser = Apitoken.where(:token => params[:user]).first.user      
+      @closedtasks = thisuser.tasks.where(
+        :id => thisuser.statuses.where(:status => 'closed').map(&:task_id)
+      ).order(:due)
+      render :json => @closedtasks
+    else
+      render :json => {}
+    end
   end
 
   def archivedtasks_as_json
-    @archivedtasks = current_user.tasks.where(
-      :id => current_user.statuses.where(:status => 'archived').map(&:task_id)
-    ).order(:due)
-    render :json => @archivedtasks
+    if Apitoken.where(:token => params[:user]).first
+      thisuser = Apitoken.where(:token => params[:user]).first.user
+      @archivedtasks = thisuser.tasks.where(
+        :id => thisuser.statuses.where(:status => 'archived').map(&:task_id)
+      ).order(:due)
+      render :json => @archivedtasks
+    else
+      render :json => {}
+    end
   end
+
 
   def archive
     @archivedtasks = current_user.tasks.where(

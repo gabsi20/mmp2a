@@ -15,7 +15,7 @@ development:
   database: <%= ENV["local_db"] %>
   username: <%= ENV["local_user"] %>
   password: <%= ENV["local_pwd"] %>
-  host: localhost  
+  host: ""  
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
