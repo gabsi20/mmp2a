@@ -16,10 +16,15 @@ Rails.application.routes.draw do
   #resources :calendars
   #resources :users
 
-  # APICALLS
+  # APICALLS - get json
   get "api/:user/open.json" => 'tasks#opentasks_as_json'
   get "api/:user/closed.json" => 'tasks#closedtasks_as_json'
   get "api/:user/archived.json" => 'tasks#archivedtasks_as_json'
+
+  # APICALLS - edit tasks
+  post "api/archive" => 'tasks#api_archive_task'
+  post "api/toggle" => 'tasks#api_toggle_task'
+
   post "test" => 'tasks#testmethod'
   get "apitoken" => 'apitoken#index'
 

@@ -1,8 +1,8 @@
 # Displays different task pages
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate, except: [:opentasks_as_json, :closedtasks_as_json, :archivedtasks_as_json]
-
+  before_action :authenticate, except: [:opentasks_as_json, :closedtasks_as_json, :archivedtasks_as_json, :api_toggle_task, :api_archive_task]
+  skip_before_action :verify_authenticity_token, only: [:api_toggle_task, :api_archive_task]
 
   # GET /tasks
   # GET /tasks.json
@@ -23,6 +23,8 @@ class TasksController < ApplicationController
         :notice => 'You need to login before handling tasks.'
     end
   end
+
+  # API-Tasks
 
   def opentasks_as_json
     if Apitoken.where(:token => params[:user]).first
@@ -59,6 +61,68 @@ class TasksController < ApplicationController
       render :json => {}
     end
   end
+
+  def api_toggle_task
+    # if params are set and apitoken exists
+    if params[:task] && params[:user] && Apitoken.where(:token => params[:user]).first
+      this_user = Apitoken.where(:token => params[:user]).first.user
+      # if status with task exists
+      if this_user.statuses.where(:task_id => params[:task]).first
+        this_status = this_user.statuses.where(:task_id => params[:task]).first
+
+        # toggle status
+        if this_status.status == 'open'
+          this_status.status = 'closed'          
+        else
+          this_status.status = 'open'
+        end
+        this_status.save
+        render :json => {
+          status: this_status.status
+        }        
+      else
+        # task not found
+        render :json => {
+          error: "task not found"
+        }
+      end
+    else
+      # apitoken does not exist
+      render :json => {
+        error: "authentication failed"
+      }
+    end
+  end
+
+  def api_archive_task
+    # if params are set and apitoken exists
+    if params[:task] && params[:user] && Apitoken.where(:token => params[:user]).first
+      this_user = Apitoken.where(:token => params[:user]).first.user
+      # if status with task exists
+      if this_user.statuses.where(:task_id => params[:task]).first
+        this_status = this_user.statuses.where(:task_id => params[:task]).first
+
+        # archive status
+        this_status.status = 'archived'
+        this_status.save
+        render :json => {
+          status: this_status.status
+        }        
+      else
+        # task not found
+        render :json => {
+          error: "task not found"
+        }
+      end
+    else
+      # apitoken does not exist
+      render :json => {
+        error: "authentication failed"
+      }
+    end
+  end
+
+  # End API-Tasks
 
 
   def archive
