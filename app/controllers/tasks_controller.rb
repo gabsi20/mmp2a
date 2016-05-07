@@ -122,6 +122,19 @@ class TasksController < ApplicationController
     end
   end
 
+  def api_get_token
+    if Apitoken.where(user_id: current_user.id).exists? 
+      this_token = Apitoken.where(user_id: current_user.id).first.token
+      render :json => {
+        api_token: this_token
+      }
+    else
+      render :json => {
+        error: "no token set"
+      }
+    end
+  end
+
   # End API-Tasks
 
 

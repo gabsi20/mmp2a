@@ -25,6 +25,9 @@ Rails.application.routes.draw do
   post "api/archive" => 'tasks#api_archive_task'
   post "api/toggle" => 'tasks#api_toggle_task'
 
+  # APICALLS - get token
+  get "api/gettoken" => 'tasks#api_get_token'
+
   post "test" => 'tasks#testmethod'
   get "apitoken" => 'apitoken#index'
 
