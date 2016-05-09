@@ -36,17 +36,38 @@ class TasksController < ApplicationController
 
   def opentasks_as_json
     tasks = @mobile_user.tasks.references(:statuses).where( statuses: { status: 'open' }).order(:due)
-    render :json => tasks.to_json(:include => [:statuses])
+    status_tasks = []
+    tasks.all.each do |task|
+      status_tasks.push({
+        task: task,
+        status: @mobile_user.statuses.where(:task_id => task.id).first.status
+      })
+    end
+    render :json => status_tasks
   end
 
   def closedtasks_as_json
     tasks = @mobile_user.tasks.references(:statuses).where( statuses: { status: 'closed' }).order(:due)
-    render :json => tasks.to_json(:include => [:statuses])
+    status_tasks = []
+    tasks.all.each do |task|
+      status_tasks.push({
+        task: task,
+        status: @mobile_user.statuses.where(:task_id => task.id).first.status
+      })
+    end
+    render :json => status_tasks
   end
 
   def archivedtasks_as_json
     tasks = @mobile_user.tasks.references(:statuses).where( statuses: { status: 'archived' }).order(:due)
-    render :json => tasks.to_json(:include => [:statuses])
+    status_tasks = []
+    tasks.all.each do |task|
+      status_tasks.push({
+        task: task,
+        status: @mobile_user.statuses.where(:task_id => task.id).first.status
+      })
+    end
+    render :json => status_tasks
   end
 
   def api_toggle_task
