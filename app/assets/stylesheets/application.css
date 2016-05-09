@@ -65,9 +65,10 @@ a:hover{
   padding: 0px;
 }
 .main_menu ul li{
+  display: block;
   list-style: none;
   margin-bottom: 10px;
-  height: 45px;
+  min-height: 45px;
   border: 2px solid #ccc;
   text-align: center;
   font-size: 23px;
