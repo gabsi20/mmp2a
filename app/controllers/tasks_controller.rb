@@ -3,7 +3,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   before_action :authenticate, except: [:opentasks_as_json, :closedtasks_as_json, :archivedtasks_as_json, :api_toggle_task, :api_archive_task]
   skip_before_action :verify_authenticity_token, only: [:api_toggle_task, :api_archive_task]
-
+  before_action :auth_mobile, only: [:opentasks_as_json, :closedtasks_as_json, :archivedtasks_as_json, :api_toggle_task, :api_archive_task]
   # GET /tasks
   # GET /tasks.json
   def index
@@ -26,46 +26,32 @@ class TasksController < ApplicationController
 
   # API-Tasks
 
-  def opentasks_as_json
-    if Apitoken.where(:token => params[:user]).first
-      thisuser = Apitoken.where(:token => params[:user]).first.user
-      @opentasks = thisuser.tasks.where(
-        :id => thisuser.statuses.where(:status => 'open').map(&:task_id)
-      ).order(:due)
-      render :json => @opentasks
+  def auth_mobile
+    if !Apitoken.where(:token => params[:user]).first
+      render :json => {error: "User doesnt exist"}
     else
-      render :json => {}
+      @mobile_user = Apitoken.where(:token => params[:user]).first.user
     end
+  end
+
+  def opentasks_as_json
+    tasks = @mobile_user.tasks.references(:statuses).where( statuses: { status: 'open' }).order(:due)
+    render :json => tasks.to_json(:include => [:statuses])
   end
 
   def closedtasks_as_json
-    if Apitoken.where(:token => params[:user]).first
-      thisuser = Apitoken.where(:token => params[:user]).first.user      
-      @closedtasks = thisuser.tasks.where(
-        :id => thisuser.statuses.where(:status => 'closed').map(&:task_id)
-      ).order(:due)
-      render :json => @closedtasks
-    else
-      render :json => {}
-    end
+    tasks = @mobile_user.tasks.references(:statuses).where( statuses: { status: 'closed' }).order(:due)
+    render :json => tasks.to_json(:include => [:statuses])
   end
 
   def archivedtasks_as_json
-    if Apitoken.where(:token => params[:user]).first
-      thisuser = Apitoken.where(:token => params[:user]).first.user
-      @archivedtasks = thisuser.tasks.where(
-        :id => thisuser.statuses.where(:status => 'archived').map(&:task_id)
-      ).order(:due)
-      render :json => @archivedtasks
-    else
-      render :json => {}
-    end
+    tasks = @mobile_user.tasks.references(:statuses).where( statuses: { status: 'archived' }).order(:due)
+    render :json => tasks.to_json(:include => [:statuses])
   end
 
   def api_toggle_task
     # if params are set and apitoken exists
-    if params[:task] && params[:user] && Apitoken.where(:token => params[:user]).first
-      this_user = Apitoken.where(:token => params[:user]).first.user
+    if params[:task] && params[:user] && @mobile_user
       # if status with task exists
       if this_user.statuses.where(:task_id => params[:task]).first
         this_status = this_user.statuses.where(:task_id => params[:task]).first
@@ -96,8 +82,7 @@ class TasksController < ApplicationController
 
   def api_archive_task
     # if params are set and apitoken exists
-    if params[:task] && params[:user] && Apitoken.where(:token => params[:user]).first
-      this_user = Apitoken.where(:token => params[:user]).first.user
+    if params[:task] && params[:user] && @mobile_user
       # if status with task exists
       if this_user.statuses.where(:task_id => params[:task]).first
         this_status = this_user.statuses.where(:task_id => params[:task]).first
