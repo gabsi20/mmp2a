@@ -53,8 +53,8 @@ class TasksController < ApplicationController
     # if params are set and apitoken exists
     if params[:task] && params[:user] && @mobile_user
       # if status with task exists
-      if this_user.statuses.where(:task_id => params[:task]).first
-        this_status = this_user.statuses.where(:task_id => params[:task]).first
+      if @mobile_user.statuses.where(:task_id => params[:task]).first
+        this_status = @mobile_user.statuses.where(:task_id => params[:task]).first
 
         # toggle status
         if this_status.status == 'open'
@@ -84,8 +84,8 @@ class TasksController < ApplicationController
     # if params are set and apitoken exists
     if params[:task] && params[:user] && @mobile_user
       # if status with task exists
-      if this_user.statuses.where(:task_id => params[:task]).first
-        this_status = this_user.statuses.where(:task_id => params[:task]).first
+      if @mobile_user.statuses.where(:task_id => params[:task]).first
+        this_status = @mobile_user.statuses.where(:task_id => params[:task]).first
 
         # archive status
         this_status.status = 'archived'
