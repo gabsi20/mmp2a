@@ -273,13 +273,14 @@ a:hover{
   margin-top: 10px;
 }
 .ios_login{
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  width: 260px;
-  height: 52px;
-  margin-top: -26px;
-  margin-left: -130px;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: space-around;
   }
 @media only screen and (min-width : 768px) {
 
