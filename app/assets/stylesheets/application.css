@@ -13,9 +13,9 @@
  *= require_tree .
  *= require_self
  */
-@import url(https://fonts.googleapis.com/css?family=Sonsie+One);
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,300italic,700italic,700,300);
-html, body{
+ @import url(https://fonts.googleapis.com/css?family=Sonsie+One);
+ @import url(https://fonts.googleapis.com/css?family=Roboto:400,300italic,700italic,700,300);
+ html, body{
   margin: 0;
   padding: 0;
   color: #777;
@@ -33,9 +33,9 @@ p{
   color: #9DC7E4;
   margin: 5px;
   text-shadow: 2px  2px 2px #fff,
-                  2px -2px 2px #fff,
-                 -2px  2px 2px #fff,
-                 -2px -2px 2px #fff;
+  2px -2px 2px #fff,
+  -2px  2px 2px #fff,
+  -2px -2px 2px #fff;
   width: 50%;
 }
 a{
@@ -85,8 +85,8 @@ a:hover{
   margin: 12px;
   width: 40px;
   height: 40px;
-    float: right;
-    border: 2px solid #fff;
+  float: right;
+  border: 2px solid #fff;
   border-radius: 5px;
   z-index: 999;
 }
@@ -105,10 +105,10 @@ a:hover{
 }
 #header{
   background: -webkit-linear-gradient(#9DC7E4, #50A5B9); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#9DC7E4, #50A5B9); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#9DC7E4, #50A5B9); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#9DC7E4, #50A5B9); /* Standard syntax */
-    height: 65px;
+  background: -o-linear-gradient(#9DC7E4, #50A5B9); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#9DC7E4, #50A5B9); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#9DC7E4, #50A5B9); /* Standard syntax */
+  height: 65px;
 }
 .singletask{
   border: 2px solid #ccc;
@@ -119,7 +119,7 @@ a:hover{
   font-weight: 700;
   font-size: 1.6em;
   overflow: hidden;
-    text-overflow: ellipsis;
+  text-overflow: ellipsis;
 }
 .singletask_done{
   border: 2px solid #ccc;
@@ -272,6 +272,15 @@ a:hover{
   display: none;
   margin-top: 10px;
 }
+.ios_login{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 260px;
+  height: 52px;
+  margin-top: -26px;
+  margin-left: -130px;
+  }
 @media only screen and (min-width : 768px) {
 
   .main_menu{

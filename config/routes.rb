@@ -28,6 +28,9 @@ Rails.application.routes.draw do
   # APICALLS - get token
   get "api/gettoken" => 'tasks#api_get_token'
 
+  # MOBILE - LOGIN
+  get "ioslogin" => 'pages#ios_login'
+
   post "test" => 'tasks#testmethod'
   get "apitoken" => 'apitoken#index'
 

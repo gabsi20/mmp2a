@@ -1,0 +1,26 @@
+<% if current_user
+      large = 10
+      largemen = 2
+    else
+      large = 12
+      largemen = 0
+    end
+%>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Todoify</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <%= favicon_link_tag 'fav.png', rel: 'icon', sizes: '192x192' %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div class="ios_login">
+    <%= yield %>
+</div>
+</body>
+</html>
