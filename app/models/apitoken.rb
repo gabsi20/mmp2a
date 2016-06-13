@@ -5,7 +5,7 @@ class Apitoken < ActiveRecord::Base
 	def self.create user
 		create! do |apitoken|
 			apitoken.user_id = user.id
-			apitoken.token = rand(999)
+			apitoken.token = SecureRandom.hex(20)
 		end
 	end
 end
