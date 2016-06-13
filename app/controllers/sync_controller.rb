@@ -1,15 +1,29 @@
 # Handles Google database synchronization
 class SyncController < ApplicationController
+  layout "ios_application", only: [:ios_select]
   before_action :setup
   require 'google/api_client'
 
   def select
     calendar_result = @client.execute(
-        :api_method => @service.calendar_list.get,
-        :parameters => {
-          'calendarId' => ''
-        }
-    )
+      :api_method => @service.calendar_list.get,
+      :parameters => {
+        'calendarId' => ''
+      }
+      )
+
+    @exist = current_user.calendars
+    @calendars = calendar_result.data.items
+  end
+
+  # ios
+  def ios_select
+    calendar_result = @client.execute(
+      :api_method => @service.calendar_list.get,
+      :parameters => {
+        'calendarId' => ''
+      }
+      )
 
     @exist = current_user.calendars
     @calendars = calendar_result.data.items
@@ -21,11 +35,11 @@ class SyncController < ApplicationController
     unless params['selection'].nil?
       params['selection'].each do |calendar_id|
         calendar_result = @client.execute(
-            :api_method => @service.calendar_list.get,
-            :parameters => {
-              'calendarId' => calendar_id[1]
-            }
-        )
+          :api_method => @service.calendar_list.get,
+          :parameters => {
+            'calendarId' => calendar_id[1]
+          }
+          )
         calendar = Calendar.where('uid' => calendar_result.data['id']).first
         if(calendar.blank?)
           calendar = Calendar.create calendar_result.data
@@ -65,7 +79,7 @@ class SyncController < ApplicationController
   def setup
     @client = Google::APIClient.new(:application_name => 'ToDoify')
     token = Token.where(:user => current_user,
-                        :provider => 'google_oauth2').first
+      :provider => 'google_oauth2').first
     @client.authorization.access_token = token.fresh_token
     @service = @client.discovered_api('calendar', 'v3')
   end
@@ -76,7 +90,7 @@ class SyncController < ApplicationController
       :parameters => {
         'calendarId' => calendar_id
       }
-    )
+      )
     calendar_result.data.items
   end
 end

@@ -1,6 +1,6 @@
 # Handles Static sites
 class PagesController < ApplicationController
-  layout "ios_login", only: [:ios_login]
+  layout "ios_application", only: [:ios_login]
 
   def index
     if current_user
