@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   get "ioslogin" => 'pages#ios_login'
 
   # MOBILE - SYNC
-  get 'sync/ios_select' => 'sync#ios_select'
+  get 'sync/ios_select' => 'sync#select'
 
   post "test" => 'tasks#testmethod'
   get "apitoken" => 'apitoken#index'
