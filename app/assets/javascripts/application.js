@@ -15,6 +15,8 @@
 //= require turbolinks
 //= require_tree .
 
+// enables css-pseudo-class :active
+document.addEventListener("touchstart", function() {},false);
 
 var ready = function() {
   $('#burger').click(function(){
