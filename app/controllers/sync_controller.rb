@@ -5,6 +5,11 @@ class SyncController < ApplicationController
   require 'google/api_client'
 
   def select
+    # if previous url contains "ioslogin" --> redirect to ios_select
+    if URI(request.referer).path.include? "ioslogin"
+      redirect_to sync_ios_select_path
+    end
+
     calendar_result = @client.execute(
       :api_method => @service.calendar_list.get,
       :parameters => {
@@ -77,11 +82,15 @@ class SyncController < ApplicationController
   end
 
   def setup
-    @client = Google::APIClient.new(:application_name => 'ToDoify')
-    token = Token.where(:user => current_user,
-      :provider => 'google_oauth2').first
-    @client.authorization.access_token = token.fresh_token
-    @service = @client.discovered_api('calendar', 'v3')
+    if current_user
+      @client = Google::APIClient.new(:application_name => 'ToDoify')
+      token = Token.where(:user => current_user,
+        :provider => 'google_oauth2').first
+      @client.authorization.access_token = token.fresh_token
+      @service = @client.discovered_api('calendar', 'v3')
+    else
+      redirect_to ioslogin_path
+    end
   end
 
   def get_events_from_google calendar_id
