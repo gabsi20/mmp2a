@@ -261,6 +261,18 @@ a:hover{
 .syncbutton:hover{
   background-color: #C6EFFF;
 }
+.ios_syncbutton{
+  width: 100%;
+  line-height: 40px;
+  background-color: #eee;
+  border: 2px solid #ccc;
+  font-size: 1.2em;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.ios_syncbutton:hover{
+  background-color: #C6EFFF;
+}
 .calendar_checkbox{
   text-align: center;
 }
