@@ -14,7 +14,7 @@ class PagesController < ApplicationController
     if current_user
       redirect_to tasks_path
     else
-      render template: 'pages/index.html'
+      render template: 'pages/ioslogin.html'
     end
   end
 

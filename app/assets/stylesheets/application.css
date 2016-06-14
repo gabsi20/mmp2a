@@ -272,7 +272,7 @@ a:hover{
   display: none;
   margin-top: 10px;
 }
-.ios_login{
+/*.ios_login{
   display: flex;
   height: 100%;
   width: 100%;
@@ -281,31 +281,42 @@ a:hover{
   justify-content: center;
   align-items: center;
   align-content: space-around;
-  }
-@media only screen and (min-width : 768px) {
+  }*/
 
-  .main_menu{
-    display: none;
-    float: right;
+  .ios_login {
+    text-align: center;
+  }
 
-  }
-  .burgericon{
-    display: block;
-  }
-  .detailtitle{
-    display: block;
-  }
-}
+  .ios_login_active:active {
+    display: inline-block;
+    text-shadow: 1px 1px 0px rgba(0,0,0,0.2);
+    background-color: #F5F5F5;
+    padding: 10px;
+    }
+  @media only screen and (min-width : 768px) {
 
-@media only screen and (min-width : 1200px) {
-  .main_menu{
-    display: block;
-    float: right;
+    .main_menu{
+      display: none;
+      float: right;
+
+    }
+    .burgericon{
+      display: block;
+    }
+    .detailtitle{
+      display: block;
+    }
   }
-  .burgericon{
-    display: none;
+
+  @media only screen and (min-width : 1200px) {
+    .main_menu{
+      display: block;
+      float: right;
+    }
+    .burgericon{
+      display: none;
+    }
+    .detailtitle{
+      display: block;
+    }
   }
-  .detailtitle{
-    display: block;
-  }
-}
